@@ -1,0 +1,173 @@
+import React, { useState, useEffect } from "react";
+import { CheckIcon, ClipboardIcon } from "@heroicons/react/solid";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "react-toastify";
+import { createLiveSession, addParticipantToLiveSession } from "@/api/index";
+
+export function MeetingDetailsScreen({
+  onClickJoin,
+  _handleOnCreateMeeting,
+  participantName,
+  setParticipantName,
+  onClickStartMeeting,
+}) {
+  const [meetingId, setMeetingId] = useState("");
+  const [sessionName, setSessionName] = useState("Untitled session"); // Default value for session name
+  const [meetingIdError, setMeetingIdError] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const [isCreateMeetingClicked, setIsCreateMeetingClicked] = useState(false);
+  const [isJoinMeetingClicked, setIsJoinMeetingClicked] = useState(false);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user?.username) {
+      setParticipantName(user.username);
+    }
+  }, [user, setParticipantName]);
+
+  return (
+    <div className="flex flex-1 flex-col justify-center w-full md:p-[6px] sm:p-1 p-1.5">
+      {isCreateMeetingClicked ? (
+        <>
+          <div
+            className="border border-solid border-gray-400 rounded-xl px-4 py-3 flex items-center justify-center"
+            style={{ backgroundColor: "rgba(32,36,39,255)" }}
+          >
+            <p className="text-white text-base">{`Meeting code : ${meetingId}`}</p>
+            <button
+              className="ml-2"
+              onClick={() => {
+                navigator.clipboard.writeText(meetingId);
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 3000);
+              }}
+            >
+              {isCopied ? (
+                <CheckIcon className="h-5 w-5 text-green-400" />
+              ) : (
+                <ClipboardIcon className="h-5 w-5 text-white" />
+              )}
+            </button>
+          </div>
+          <input
+            style={{ backgroundColor: "rgba(32,36,39,255)" }}
+            value={sessionName}
+            onChange={(e) => setSessionName(e.target.value)}
+            placeholder="Enter session name"
+            className={`px-4 py-3 bg-gray-650 rounded-xl w-full text-center mt-4 ${
+              sessionName === "Untitled session" ? "text-gray-600 font-bold" : "text-white"
+            }`}
+          />
+        </>
+      ) : isJoinMeetingClicked ? (
+        <>
+          <input
+            style={{ backgroundColor: "rgba(32,36,39,255)" }}
+            defaultValue={meetingId}
+            onChange={(e) => setMeetingId(e.target.value)}
+            placeholder="Enter meeting Id"
+            className="px-4 py-3 bg-gray-650 rounded-xl text-white w-full text-center"
+          />
+          {meetingIdError && (
+            <p className="text-xs text-red-600">{`Please enter a valid meetingId`}</p>
+          )}
+        </>
+      ) : null}
+
+      {(isCreateMeetingClicked || isJoinMeetingClicked) && (
+        <>
+          <input
+            style={{ backgroundColor: "rgba(32,36,39,255)" }}
+            value={participantName}
+            onChange={(e) => setParticipantName(e.target.value)}
+            placeholder="Enter your name"
+            className="px-4 py-3 mt-5 bg-gray-650 rounded-xl text-white w-full text-center"
+          />
+          <button
+            disabled={
+              participantName.length < 3 ||
+              (isCreateMeetingClicked && sessionName.trim().length === 0) // Disable if session name is empty
+            }
+            style={{
+              backgroundColor:
+                participantName.length < 3 ||
+                (isCreateMeetingClicked && sessionName.trim().length === 0)
+                  ? "rgba(32,36,39,255)"
+                  : "rgba(85,104,254,255)",
+            }}
+            className="w-full text-white px-2 py-3 rounded-xl mt-5"
+            onClick={async () => {
+              if (isCreateMeetingClicked) {
+                if (sessionName.trim().length === 0) {
+                  toast.error("Session name cannot be empty!", {
+                    position: "bottom-left",
+                    autoClose: 4000,
+                  });
+                  return;
+                }
+                try {
+                  const response = await createLiveSession({
+                    meetingId,
+                    sessionName, // Pass session name to the API
+                  });
+                  console.log("Live session created:", response.data.data);
+                  onClickStartMeeting(meetingId);
+                } catch (error) {
+                  console.error("Error creating live session", error);
+                  toast.error("Error creating session", {
+                    position: "bottom-left",
+                    autoClose: 4000,
+                  });
+                }
+              } else {
+                // Joining an existing session
+                if (meetingId.match("\\w{4}\\-\\w{4}\\-\\w{4}")) {
+                  try {
+                    const response = await addParticipantToLiveSession(
+                      meetingId
+                    );
+                    console.log("Joined live session:", response.data.data);
+                    onClickJoin(meetingId);
+                  } catch (error) {
+                    console.error("Error joining session", error);
+                    setMeetingIdError(true);
+                  }
+                } else {
+                  setMeetingIdError(true);
+                }
+              }
+            }}
+          >
+            {isCreateMeetingClicked ? "Start a session" : "Join a session"}
+          </button>
+        </>
+      )}
+      {!isCreateMeetingClicked && !isJoinMeetingClicked && (
+        <div className="w-full md:mt-0 mt-4 flex flex-col">
+          <div className="flex items-center justify-center flex-col w-full ">
+            <button
+              className="w-full px-2 py-3 rounded-xl"
+              style={{ backgroundColor: "rgba(85,104,254,255)", color: "white" }}
+              onClick={async () => {
+                setIsCreateMeetingClicked(true);
+                const { meetingId: newMeetingId } = await _handleOnCreateMeeting();
+                setMeetingId(newMeetingId);
+              }}
+            >
+              Create a session
+            </button>
+            <button
+              className="w-full px-2 py-3 rounded-xl mt-5"
+              style={{ backgroundColor: "rgba(32,36,39,255)", color: "white" }}
+              onClick={() => {
+                setIsJoinMeetingClicked(true);
+              }}
+            >
+              Join a session
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

@@ -1,0 +1,9 @@
+{
+    "github.copilot.enable": {
+        "enabled": true
+    },
+    "github.copilot.enableTelemetry": true,
+    "github.copilot.suggestionDelay": 100,
+    "github.copilot.suggestionTrigger": "onDemand",
+    "github.copilot.editor.enableAutoCompletions": true
+}

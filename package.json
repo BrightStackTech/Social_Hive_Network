@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "googleapi": "^1.0.2",
+    "googleapis": "^144.0.0",
+    "video-trimmer": "^1.0.25"
+  }
+}

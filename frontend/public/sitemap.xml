@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+		<!--	created with www.mysitemapgenerator.com	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/login</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/settings</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/about-the-site</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/contact</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/terms-of-service</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/privacy-policy</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/register</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/explore</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/search</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/groups</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/chat</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<!-- <url>
+	<loc>https://Social_Hive_Network.vercel.app/notifications</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url> -->
+<url>
+	<loc>https://Social_Hive_Network.vercel.app/profile</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<!-- <url>
+	<loc>https://Social_Hive_Network.vercel.app/editProfile</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url> -->
+<!-- <url>
+	<loc>https://Social_Hive_Network.vercel.app/engine.io</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url> -->
+<!-- <url>
+	<loc>https://Social_Hive_Network.vercel.app/setLogin</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url> -->
+<!-- <url>
+	<loc>https://Social_Hive_Network.vercel.app/add-personal-details</loc>
+	<lastmod>2024-10-27T14:48:46+01:00</lastmod>
+	<priority>1.0</priority>
+</url> -->
+</urlset>

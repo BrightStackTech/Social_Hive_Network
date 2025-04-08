@@ -1,0 +1,29 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+export function MeetingDetailsScreen() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="flex flex-1 flex-col justify-center w-full md:p-[6px] sm:p-1 p-1.5">
+      <div className="w-full md:mt-0 mt-4 flex flex-col">
+        <div className="flex items-center justify-center flex-col w-full">
+          <button
+            className="w-full px-2 py-3 rounded-xl"
+            style={{ backgroundColor: "rgba(85,104,254,255)", color: "white" }}
+            onClick={() => navigate("/livesessions/create-session")}
+          >
+            Create a session
+          </button>
+          <button
+            className="w-full px-2 py-3 rounded-xl mt-5"
+            style={{ backgroundColor: "rgba(32,36,39,255)", color: "white" }}
+            onClick={() => navigate("/livesessions/join-session")}
+          >
+            Join a session
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

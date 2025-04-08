@@ -1,0 +1,88 @@
+import { useState, useEffect } from "react";
+import { CheckIcon, ClipboardIcon } from "@heroicons/react/solid";
+import { toast } from "react-toastify";
+import { createLiveSession } from "@/api/index"; // Ensure correct path
+import { useNavigate } from "react-router-dom";
+
+export default function CreateSessionScreen() {
+  const [meetingId, setMeetingId] = useState("");
+  const [participantName, setParticipantName] = useState("");
+  const [isCopied, setIsCopied] = useState(false);
+  const navigate = useNavigate();
+
+  // Function to generate a meeting ID in the format xxxx-xxxx-xxxx
+  const generateMeetingId = () => {
+    const segments = [];
+    for (let i = 0; i < 3; i++) {
+      segments.push(Math.random().toString(36).substring(2, 6)); // Generate 4 random alphanumeric characters
+    }
+    return segments.join("-");
+  };
+
+  // Generate meeting ID when the component loads
+  useEffect(() => {
+    const newMeetingId = generateMeetingId();
+    setMeetingId(newMeetingId);
+  }, []);
+
+  // Function to copy meeting ID to clipboard
+  const handleCopy = () => {
+    navigator.clipboard.writeText(meetingId);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 3000);
+  };
+
+  // Function to start the session
+  const handleStartSession = async () => {
+    if (participantName.trim().length < 3) {
+      toast.error("Please enter a valid participant name.");
+      return;
+    }
+
+    try {
+      const response = await createLiveSession({ meetingId });
+      console.log("Live session created:", response.data.data);
+      toast.success("Meeting created successfully!");
+      navigate(`/livesessions/${meetingId}`); // Navigate to the meeting session
+    } catch (error) {
+      console.error("Error creating live session", error);
+      toast.error("Failed to create meeting. Please try again.");
+    }
+  };
+
+  return (
+    <div className="flex flex-1 flex-col justify-center w-full md:p-[6px] sm:p-1 p-1.5">
+      {/* Meeting Code Display */}
+      <div
+        className="border border-solid border-gray-400 rounded-xl px-4 py-3 flex items-center justify-center mb-4"
+        style={{ backgroundColor: "rgba(32,36,39,255)" }}
+      >
+        <p className="text-white text-base">{`Meeting code: ${meetingId}`}</p>
+        <button className="ml-2" onClick={handleCopy}>
+          {isCopied ? (
+            <CheckIcon className="h-5 w-5 text-green-400" />
+          ) : (
+            <ClipboardIcon className="h-5 w-5 text-white" />
+          )}
+        </button>
+      </div>
+
+      {/* Participant Name Input */}
+      <input
+        className="mt-5 px-4 py-3 bg-gray-200 rounded"
+        placeholder="Enter your name"
+        value={participantName}
+        onChange={(e) => setParticipantName(e.target.value)}
+      />
+
+      {/* Start Session Button */}
+      <button
+        disabled={participantName.trim().length < 3}
+        className="bg-green-600 text-white py-2 px-4 rounded mt-5 disabled:bg-gray-400"
+        onClick={handleStartSession}
+      >
+        Start a session
+      </button>
+    </div>
+  );
+}
