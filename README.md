@@ -25,7 +25,8 @@ A platform designed to foster community and collaboration among students from va
 
 ---
 
-To Download & Install this project, 
+
+A. To Download & Install this project, 
 
 1. **Clone** this Repository:
  ```bash
@@ -43,7 +44,7 @@ git clone https://github.com/BrightStackTech/Social_Hive_Network.git
     npm install
     ```
 
-To RUN this project,
+B. To RUN this project,
 
 1. RUN Backend
    ```bash
@@ -56,8 +57,9 @@ To RUN this project,
     npm run dev
    ```
 
-**Backend will run on port _8000_**
+**Backend will run on port _8000_ &**
 **Frontend will run on port _5173_**
+
 
 if ports are not free, 
 
