@@ -33,13 +33,12 @@ const CommunitiesPage = () => {
 
     const fetchUnjoinedCommunities = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/communities/unjoined-communities`, {
-          headers: { Authorization: `Bearer ${user?.token}` },
+        const response = await axios.get('/api/v1/communities/unjoined-communities', {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
         });
-        console.log("Unjoined communities response:", response.data);
-        setUnjoinedCommunities(
-          Array.isArray(response.data.data) ? response.data.data : []
-        );
+        setUnjoinedCommunities(response.data.data);
       } catch (error) {
         console.error('Error fetching unjoined communities:', error);
       }
@@ -52,11 +51,7 @@ const CommunitiesPage = () => {
             Authorization: `Bearer ${user?.token}`,
           },
         });
-        // Ensure communitiesFeed is an array
-        const feed = Array.isArray(response.data)
-          ? response.data
-          : response.data.posts || [];
-        setCommunitiesFeed(feed);
+        setCommunitiesFeed(response.data);
       } catch (error) {
         console.error('Error fetching communities feed:', error);
       } finally {
@@ -64,19 +59,18 @@ const CommunitiesPage = () => {
       }
     };
     
-  const fetchJoinedCommunities = async () => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/communities/joined-communities`, {
-        headers: { Authorization: `Bearer ${user?.token}` },
-      });
-      console.log("Joined communities response:", response.data);
-      setJoinedCommunities(
-        Array.isArray(response.data.data) ? response.data.data : []
-      );
-    } catch (error) {
-      console.error('Error fetching joined communities:', error);
-    }
-  };
+    const fetchJoinedCommunities = async () => {
+      try {
+        const response = await axios.get('/api/v1/communities/joined-communities', {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        });
+        setJoinedCommunities(response.data.data);
+      } catch (error) {
+        console.error('Error fetching joined communities:', error);
+      }
+    };
 
     fetchUnjoinedCommunities();
     fetchJoinedCommunities();
