@@ -33,12 +33,12 @@ A. To Download & Install this project,
 git clone https://github.com/BrightStackTech/Social_Hive_Network.git
  ```
 2. Install the dependencies:
-   A. Backend
+   1. Backend
     ```bash
     cd backend
     npm install
     ```
-   B. Frontend
+   2. Frontend
     ```bash
     cd frontend
     npm install
