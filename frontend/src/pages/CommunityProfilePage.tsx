@@ -39,8 +39,8 @@ const CommunityProfilePage: React.FC = () => {
   const [memberToRemove, setMemberToRemove] = useState<any>(null);
   const decodedCommunityName = decodeURIComponent(communityName || '');
   const [unjoinedCommunities, setUnjoinedCommunities] = useState<any[]>([]);
-  const isRemoved = community ? community?.removedMem.includes(user?._id ?? '') : false;
-  const isPending = community ? community?.pendingReq.includes(user?._id ?? '') : false;
+  const isRemoved = community ? community?.removedMem?.includes(user?._id ?? '') : false;
+  const isPending = community ? community?.pendingReq?.includes(user?._id ?? '') : false;
   const [joinedCommunities, setJoinedCommunities] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [resizableHeight, setResizableHeight] = useState(50); 
@@ -188,7 +188,7 @@ const CommunityProfilePage: React.FC = () => {
   };
 
   const filteredJoinedCommunities = joinedCommunities.filter((community) =>
-    community?.communityName.toLowerCase().includes(searchQuery.toLowerCase())
+    community?.communityName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -376,8 +376,8 @@ const CommunityProfilePage: React.FC = () => {
               <JoinLeaveButton
                 communityName={community?.communityName}
                 isJoined={false}
-                isRemoved={community?.removedMem.includes(user?._id)}
-                isPending={community?.pendingReq.includes(user?._id)}
+                isRemoved={community?.removedMem?.includes(user?._id)}
+                isPending={community?.pendingReq?.includes(user?._id)}
                 onJoinLeave={() => handleJoinLeave(community?.communityName)}
               />
             </div>
