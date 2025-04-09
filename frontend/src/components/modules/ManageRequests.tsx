@@ -17,14 +17,14 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
   const [pendingRequests, setPendingRequests] = useState<Request[]>([]);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<Request | null>(null);
-  const { user } = useAuth();
+  const { token } = useAuth();
 
   useEffect(() => {
     const fetchPendingRequests = async () => {
       try {
         const response = await axios.get(`/api/v1/communities/${communityName}/pending-requests`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setPendingRequests(response.data.data);
@@ -34,7 +34,7 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
     };
 
     fetchPendingRequests();
-  }, [user?.token, communityName]);
+  }, [token, communityName]);
 
   const handleMouseEnter = () => setIsHovered(false);
   const handleMouseLeave = () => setIsHovered(true);
@@ -56,7 +56,7 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
     try {
       await axios.post(`/api/v1/communities/${communityName}/handle-join-request/${userId}/${action}`, {}, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setPendingRequests(prev => prev.filter(request => request._id !== userId));
@@ -80,7 +80,7 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
         onClick={handleClickOpen}
       >
         Manage Requests
-        {pendingRequests.length > 0 && (
+        {pendingRequests?.length > 0 && (
           <span className="absolute top-0 right-0 inline-block w-3 h-3 bg-red-500 rounded-full"></span>
         )}
       </Button>
@@ -89,10 +89,10 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
           <DialogTitle>Manage Requests</DialogTitle>
           <DialogClose onClick={handleClose} />
           <div>
-            {pendingRequests.length === 0 ? (
+            {pendingRequests?.length === 0 ? (
               <p>No pending requests</p>
             ) : (
-              pendingRequests.map(request => (
+              pendingRequests?.map(request => (
                 <div key={request._id} className="flex items-center justify-between cursor-pointer hover:bg-muted p-2 gap-2">
                   <div className="flex items-center gap-2">
                     <img src={request.profilePicture} className="w-10 h-10 rounded-full" alt="" />
