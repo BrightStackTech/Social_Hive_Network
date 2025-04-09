@@ -31,7 +31,7 @@ const CommunityProfilePage: React.FC = () => {
   const { communityName } = useParams<{ communityName: string }>();
   const [community, setCommunity] = useState<Community | null>(null);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const scrollableDiv = useRef<HTMLDivElement>(null);
   const [showPreview, setShowPreview] = useState(false);
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const CommunityProfilePage: React.FC = () => {
     document.title = "SocialHive- Communities";
     const fetchCommunity = async () => {
       try {
-        const response = await axios.get(`/api/v1/communities/${decodedCommunityName}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/${decodedCommunityName}`);
         setCommunity(response.data.data);
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -68,7 +68,7 @@ const CommunityProfilePage: React.FC = () => {
 
     const fetchCompostsByCommunityName = async () => {
       try {
-        const response = await axios.get(`/api/v1/composts/community-name/${communityName}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/composts/community-name/${communityName}`);
         setCommunity((prevCommunity: Community | null) => ({
           ...prevCommunity!,
           composts: response.data,
@@ -80,9 +80,9 @@ const CommunityProfilePage: React.FC = () => {
 
     const fetchUnjoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/unjoined-communities', {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/unjoined-communities`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setUnjoinedCommunities(response.data.data);
@@ -92,9 +92,9 @@ const CommunityProfilePage: React.FC = () => {
     };
     const fetchJoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/joined-communities', {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/joined-communities`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setJoinedCommunities(response.data.data);
@@ -107,12 +107,12 @@ const CommunityProfilePage: React.FC = () => {
     fetchUnjoinedCommunities();
     fetchJoinedCommunities();
     fetchCompostsByCommunityName();
-  }, [decodedCommunityName, navigate, user?.token]);
+  }, [decodedCommunityName, navigate, token]);
 
   const handleJoinLeave = (_communityName: any) => {
     const fetchCommunity = async () => {
       try {
-        const response = await axios.get(`/api/v1/communities/${decodedCommunityName}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/${decodedCommunityName}`);
         setCommunity(response.data.data);
         if (!isJoined) {
           //navigate(`/communities/c/${decodedCommunityName}`);
@@ -127,9 +127,9 @@ const CommunityProfilePage: React.FC = () => {
 
   const handleRemoveMember = async (userId: string) => {
     try {
-      await axios.delete(`/api/v1/communities/${decodedCommunityName}/remove/${userId}`, {
+      await axios.delete(`${import.meta.env.VITE_SERVER_URI}/communities/${decodedCommunityName}/remove/${userId}`, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       handleJoinLeave(decodedCommunityName);
