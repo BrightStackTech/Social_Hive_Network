@@ -21,7 +21,7 @@ import { FaTimes } from 'react-icons/fa';
 
 const CheckComPost = () => {
   const { id } = useParams<{ id: string }>();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const [post, setPost] = useState<any>(null);
   const [voteCount, setVoteCount] = useState(0);
   const [upvoted, setUpvoted] = useState(false);
@@ -58,7 +58,7 @@ const CheckComPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`/api/v1/composts/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/composts/${id}`);
         setPost(response.data);
         setVoteCount(response.data.pointsCount || 0);
         setUpvoted(response.data.upvotedBy?.includes(user?._id) || false);
@@ -73,7 +73,7 @@ const CheckComPost = () => {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`/api/v1/composts/${id}/comments`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/composts/${id}/comments`);
         const sortedComments = response.data.sort((a: ComComment, b: ComComment) => {
           if (b.pointsCount === a.pointsCount) {
             return new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime();
@@ -88,9 +88,9 @@ const CheckComPost = () => {
 
     const fetchUnjoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/unjoined-communities', {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/unjoined-communities`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setUnjoinedCommunities(response.data.data);
@@ -101,9 +101,9 @@ const CheckComPost = () => {
 
       const fetchJoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/joined-communities', {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/joined-communities`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setJoinedCommunities(response.data.data);
@@ -117,13 +117,13 @@ const CheckComPost = () => {
     fetchComments();
     fetchUnjoinedCommunities();
     fetchJoinedCommunities();
-  }, [id, user, user?.token]);
+  }, [id, user, token]);
 
   useEffect(() => {
     const fetchCommunityAdmin = async () => {
       try {
         if (post?.community?.communityName) {
-          const response = await axios.get(`/api/v1/communities/${post.community.communityName}`);
+          const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/${post.community.communityName}`);
           const community = response.data.data;
           setIsAdmin(community.admin._id === userId);
         }
@@ -139,9 +139,9 @@ const CheckComPost = () => {
 
   const handleJoinLeave = async (communityName: string) => {
     try {
-      const response = await axios.post(`/api/v1/communities/${communityName}/join-leave`, {}, {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URI}/communities/${communityName}/join-leave`, {}, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (response.status === 200) {
@@ -163,26 +163,26 @@ const CheckComPost = () => {
       if (downvoted) {
         setDownvoted(false);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/${post._id}/remove-downvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/remove-downvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
       if (!upvoted) {
         setUpvoted(true);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/${post._id}/upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       } else {
         setUpvoted(false);
         setVoteCount(voteCount - 1);
-        await axios.post(`/api/v1/composts/${post._id}/remove-upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/remove-upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
@@ -197,26 +197,26 @@ const CheckComPost = () => {
         if (upvoted) {
           setUpvoted(false);
           setVoteCount(voteCount - 1);
-          await axios.post(`/api/v1/composts/${post._id}/remove-upvote`, {}, {
+          await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/remove-upvote`, {}, {
             headers: {
-              Authorization: `Bearer ${user?.token}`,
+              Authorization: `Bearer ${token}`,
             },
           });
         }
         if (!downvoted) {
           setDownvoted(true);
           setVoteCount(voteCount - 1);
-          await axios.post(`/api/v1/composts/${post._id}/downvote`, {}, {
+          await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/downvote`, {}, {
             headers: {
-              Authorization: `Bearer ${user?.token}`,
+              Authorization: `Bearer ${token}`,
             },
           });
         } else {
           setDownvoted(false);
           setVoteCount(voteCount + 1);
-          await axios.post(`/api/v1/composts/${post._id}/remove-downvote`, {}, {
+          await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/remove-downvote`, {}, {
             headers: {
-              Authorization: `Bearer ${user?.token}`,
+              Authorization: `Bearer ${token}`,
             },
           });
         }
@@ -248,14 +248,14 @@ const CheckComPost = () => {
 
   const handleConfirmEdit = async () => {
     try {
-      await axios.put(`/api/v1/composts/${post._id}/edit`, {
+      await axios.put(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/edit`, {
         title: editedTitle,
         description: editedDescription,
         media: editedMedia,
         isEdited: true,
       }, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -296,9 +296,9 @@ const CheckComPost = () => {
     setCommentLoading(true);
     setError('');
     try {
-      const response = await axios.post(`/api/v1/composts/${post._id}/comments`, { commentBody: comment, communityId: post.community._id, postId: post._id }, {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/comments`, { commentBody: comment, communityId: post.community._id, postId: post._id }, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (response.status === 201) {
