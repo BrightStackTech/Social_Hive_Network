@@ -4,7 +4,7 @@ A platform designed to foster community and collaboration among students from va
 
 ### Live Link
 
-👉 [SocialHive](https://Social_Hive_Network.vercel.app)
+👉 [SocialHive](https://Social-Hive-Network.vercel.app)
 
 ---
 
