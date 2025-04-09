@@ -65,14 +65,16 @@ const CommunitiesPage = () => {
     
     const fetchJoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/joined-communities', {
+        const response = await axios.get('/api/v1/communities/unjoined-communities', {
           headers: {
             Authorization: `Bearer ${user?.token}`,
           },
         });
-        setJoinedCommunities(response.data.data);
+        setUnjoinedCommunities(
+          Array.isArray(response.data.data) ? response.data.data : []
+        );
       } catch (error) {
-        console.error('Error fetching joined communities:', error);
+        console.error('Error fetching unjoined communities:', error);
       }
     };
 
