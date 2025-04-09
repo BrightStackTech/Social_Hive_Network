@@ -94,7 +94,7 @@ const ComPostCard = ({ post }: { post: ComPost }) => {
   useEffect(() => {
     const fetchCommunityAdmin = async () => {
       try {
-        const response = await axios.get(`/api/v1/communities/${post.community?.communityName}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/${post.community?.communityName}`);
         const community = response.data.data;
         setIsAdmin(community.admin._id === userId);
       } catch (error) {
@@ -118,26 +118,26 @@ const ComPostCard = ({ post }: { post: ComPost }) => {
       if (downvoted) {
         setDownvoted(false);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/${post._id}/remove-downvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/remove-downvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
       if (!upvoted) {
         setUpvoted(true);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/${post._id}/upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       } else {
         setUpvoted(false);
         setVoteCount(voteCount - 1);
-        await axios.post(`/api/v1/composts/${post._id}/remove-upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/remove-upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
@@ -151,26 +151,26 @@ const ComPostCard = ({ post }: { post: ComPost }) => {
       if (upvoted) {
         setUpvoted(false);
         setVoteCount(voteCount - 1);
-        await axios.post(`/api/v1/composts/${post._id}/remove-upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/remove-upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
       if (!downvoted) {
         setDownvoted(true);
         setVoteCount(voteCount - 1);
-        await axios.post(`/api/v1/composts/${post._id}/downvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/downvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       } else {
         setDownvoted(false);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/${post._id}/remove-downvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/remove-downvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
@@ -201,14 +201,14 @@ const ComPostCard = ({ post }: { post: ComPost }) => {
 
   const handleConfirmEdit = async () => {
     try {
-      await axios.put(`/api/v1/composts/${post._id}/edit`, {
+      await axios.put(`${import.meta.env.VITE_SERVER_URI}/composts/${post._id}/edit`, {
         title: editedTitle,
         description: editedDescription,
         media: editedMedia,
         isEdited: true,
       }, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -228,9 +228,9 @@ const ComPostCard = ({ post }: { post: ComPost }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`/api/v1/composts/posts/${post._id}/delete`, {
+      await axios.delete(`${import.meta.env.VITE_SERVER_URI}/composts/posts/${post._id}/delete`, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setIsDeleteDialogOpen(false);
@@ -292,7 +292,7 @@ const ComPostCard = ({ post }: { post: ComPost }) => {
   
     useEffect(() => {
     if (user?.username && token) {
-      fetch(`/api/v1/users/followers/${user.username}`, {
+      fetch(`${import.meta.env.VITE_SERVER_URI}/users/followers/${user.username}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
