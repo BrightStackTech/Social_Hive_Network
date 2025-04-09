@@ -25,6 +25,53 @@ A platform designed to foster community and collaboration among students from va
 
 ---
 
+To Download & Install this project, 
+
+1. **Clone** this Repository:
+ ```bash
+git clone https://github.com/BrightStackTech/Social_Hive_Network.git
+ ```
+2. Install the dependencies:
+   A. Backend
+    ```bash
+    cd backend
+    npm install
+    ```
+   B. Frontend
+    ```bash
+    cd frontend
+    npm install
+    ```
+
+To RUN this project,
+
+1. RUN Backend
+   ```bash
+    cd backend
+    npm start
+   ```
+2. RUN Frontend
+   ```bash
+    cd frontend
+    npm run dev
+   ```
+
+**Backend will run on port _8000_**
+**Frontend will run on port _5173_**
+
+if ports are not free, 
+
+1. use netstat command to know PID of the task running on that port:
+ ```bash
+netstat -aon | findstr :port_number
+ ```
+
+2. kill the task using taskkill command using PID:
+ ```bash
+taskkill /PID PID_number /F  
+ ```
+
+---
 ## Acknowledgments 🎉
 
 - [Yog Vasaikar](https://github.com/freakynutzz100) for his insightful backend.
