@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogClose } from '@/components/ui/dialog';
+import { useState, useEffect } from 'react';
+import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import axios from 'axios';
 import { useAuth } from '@/context/AuthContext';
@@ -52,7 +52,7 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
     action: 'approve' | 'reject';
   }
 
-  const handleRequestAction = async (_id: string, p0: string, { userId, action }: HandleRequestActionParams): Promise<void> => {
+  const handleRequestAction = async (_id: string, { userId, action }: HandleRequestActionParams): Promise<void> => {
     try {
       await axios.post(`/api/v1/communities/${communityName}/handle-join-request/${userId}/${action}`, {}, {
         headers: {
@@ -103,7 +103,7 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-green-500 text-xs cursor-pointer" onClick={() => handleApproveClick(request)}>Approve</span>
-                    <span className="text-red-500 text-xs cursor-pointer" onClick={() => handleRequestAction(request._id, 'reject', { userId: request._id, action: 'reject' })}>Reject</span>
+                    <span className="text-red-500 text-xs cursor-pointer" onClick={() => handleRequestAction(request._id, { userId: request._id, action: 'reject' })}>Reject</span>
                   </div>
                 </div>
               ))
@@ -119,7 +119,7 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
             </div>
             <div className="flex justify-center gap-4 mt-4">
               <Button variant="outline" onClick={() => setConfirmDialogOpen(false)}>Cancel</Button>
-              <Button variant="default" className="bg-green-500 text-white hover:bg-green-700" onClick={() => handleRequestAction(selectedRequest._id, 'approve', { userId: selectedRequest._id, action: 'approve' })}>
+              <Button variant="default" className="bg-green-500 text-white hover:bg-green-700" onClick={() => handleRequestAction(selectedRequest._id, { userId: selectedRequest._id, action: 'approve' })}>
                 Accept {selectedRequest.username}
               </Button>
             </div>

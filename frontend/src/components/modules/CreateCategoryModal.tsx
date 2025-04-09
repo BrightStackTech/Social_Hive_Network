@@ -42,6 +42,7 @@ export default function CreateCategoryModal() {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedImage(file);
+      console.log(selectedImage);
       const url = URL.createObjectURL(file);
       setImageUrl(url);
       setIsCropDialogOpen(true);

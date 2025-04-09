@@ -6,7 +6,7 @@ import { useAuth } from '@/context/AuthContext';
 import { getUserFeed, getAccountsToFollow } from '@/api/index';
 import PostSkeletonLoader from '@/components/modules/Posts/PostSkeletonLoader';
 import { usePullToRefresh } from '@/components/modules/usePullRefreshHook';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
 import { formatDistanceToNow } from 'date-fns';
 import _ from 'lodash'; // Import lodash for throttling
@@ -19,7 +19,7 @@ function ExplorePosts() {
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const contentDivRef = useRef<HTMLDivElement>(null);
   const [skip, setSkip] = useState(0);
   const limit = 10;

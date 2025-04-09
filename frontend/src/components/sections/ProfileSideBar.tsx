@@ -19,6 +19,7 @@ const ProfileSideBar = () => {
     if (socket) {
       socket.on(ChatEventEnums.MESSAGE_RECEIVED_EVENT, (data: ChatMessageInterface) => {
         setUnreadMessages((prev) => [...prev, data]);
+        console.log(unreadMessages);
         setUnreadChats((prev) => new Set(prev).add(data.chat));
       });
 

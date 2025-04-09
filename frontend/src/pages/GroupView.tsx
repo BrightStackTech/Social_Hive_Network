@@ -30,7 +30,7 @@ function GroupView() {
 
     const urlTab = searchParams.get("tab")
     const scroll = searchParams.get("scroll")
-    const [selectedTab, setSelectedTab] = useState(urlTab || "Projects")
+    const [selectedTab, setSelectedTab] = useState(urlTab || "Members")
     const scrollableDivRef = useRef<HTMLDivElement>(null);
     const scrollToTop = ()=>{
         if(scrollableDivRef.current){
@@ -132,17 +132,6 @@ function GroupView() {
 <div className="group-tabs bg-gray-200 sticky top-0 z-[9999] dark:bg-gray-700 text-gray-800 dark:text-gray-200">
   <ul className="flex justify-center md:gap-6">
     
-    {/* <li className={`cursor-pointer hover:text-blue-500 duration-150 p-2  md:px-4 m-2
-      ${selectedTab === "Projects" && "bg-muted hover:text-gray-500 font-bold"}
-    `}
-    onClick={()=>{
-      if(selectedTab != "Projects") 
-        setSelectedTab("Projects")
-        else{
-          scrollToTop()
-        }
-    }}
-    >Projects</li> */}
     <li className={`cursor-pointer hover:text-blue-500 duration-150  p-2  md:px-4 m-2
       ${selectedTab === "Members" && "bg-muted hover:text-gray-500 font-bold"}
     `}
@@ -154,6 +143,17 @@ function GroupView() {
         }
     }}
     >Members</li>
+    <li className={`cursor-pointer hover:text-blue-500 duration-150 p-2  md:px-4 m-2
+      ${selectedTab === "Projects" && "bg-muted hover:text-gray-500 font-bold"}
+    `}
+    onClick={()=>{
+      if(selectedTab != "Projects") 
+        setSelectedTab("Projects")
+        else{
+          scrollToTop()
+        }
+    }}
+    >Projects</li>
     
   </ul>
 </div>

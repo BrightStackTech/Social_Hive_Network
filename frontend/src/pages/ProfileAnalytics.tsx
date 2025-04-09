@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProfileSideBar from "@/components/sections/ProfileSideBar";
 import MobileUserNavbar from "@/components/sections/MobileUserNavbar";
@@ -6,7 +6,7 @@ import { getAnalytics } from "@/api"; // getAnalytics should call your analytics
 import { useAuth } from "@/context/AuthContext";
 import FollowTrendGraph from "@/components/FollowTrendGraph";
 import axios from "axios"; // ensure axios is imported
-import PostCard from "@/components/modules/Posts/PostCard";
+// import PostCard from "@/components/modules/Posts/PostCard";
 
 // Components to display graphs respectively.
 import FollowersCount from "@/components/FollowersCount"; 
@@ -49,10 +49,12 @@ const ProfileAnalytics = () => {
         params: { period, type: "likes" }
         });
         setTopPosts(topResponse.data.data);
+        console.log(topPosts);
         const lowestResponse = await axios.get("/api/v1/analytics/lowest-posts", {
         params: { period, type: "likes" }
         });
         setLowestPosts(lowestResponse.data.data);
+        console.log(lowestPosts);
         } catch (error) { console.error("Error fetching top/lowest posts:", error);}
         };
         fetchPosts();

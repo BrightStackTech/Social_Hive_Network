@@ -16,7 +16,7 @@ function Footer() {
        <div className='grid grid-cols-2 text-center  md:grid-cols-4 gap-5 items-center justify-center mt-5'>
         <div>
           <p className='font-bold text-lg md:text-xl'>Contact Me</p>
-          <Link to={'mailto:socialhiveproject@gmail.com'} className='text-sm'>Email: socialhiveproject@gmail.com</Link>
+          <Link to={`mailto:${import.meta.env.VITE_SUPPORT_EMAIL}`} className='text-sm'>Email: ${import.meta.env.VITE_SUPPORT_EMAIL}</Link>
         </div>
         <div>
           <p className='font-bold text-lg md:text-xl'>Follow Me</p>

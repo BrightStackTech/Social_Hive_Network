@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ProfileSideBar from "@/components/sections/ProfileSideBar";
 import MobileUserNavbar from "@/components/sections/MobileUserNavbar";
 import axios from "axios";
 import PostCard from "@/components/modules/Posts/PostCard";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "react-toastify";
@@ -19,7 +19,7 @@ import { FaLinkedin, FaReddit, FaFacebook, FaFacebookMessenger } from "react-ico
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { PiThreadsLogoFill } from "react-icons/pi";
 import { useAuth } from "@/context/AuthContext";
-import { Category } from '@/components/modules/CategoryCard';
+// import { Category } from '@/components/modules/CategoryCard';
 
 // If available, import getUserGroups from your API
 import { getUserGroups } from "@/api/index";
@@ -51,7 +51,7 @@ function CategoryPage() {
   const shareUrl = category ? `${window.location.origin}/category/${category._id}` : "";
 
   // Nested "Share in Chat" dialog state and search/filter states
-  const [isShareChatDialogOpen, setIsShareChatDialogOpen] = useState(false);
+  // const [isShareChatDialogOpen, setIsShareChatDialogOpen] = useState(false);
   const [chatSearch, setChatSearch] = useState("");
   const [followers, setFollowers] = useState<
     Array<{ _id: string; username: string; profilePicture: string; bio?: string }>

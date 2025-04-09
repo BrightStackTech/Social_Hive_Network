@@ -85,7 +85,7 @@ const PrivacyPolicy = () => {
 
       <h2 className="text-2xl font-semibold mb-4">9. Contact Us</h2>
       <p className="mb-6">
-        If you have any questions, feel free to contact us at <strong>socialhiveproject@gmail.com</strong>.
+        If you have any questions, feel free to contact us at <strong>${import.meta.env.VITE_SUPPORT_EMAIL}</strong>.
       </p>
     </div>
    <Footer/>

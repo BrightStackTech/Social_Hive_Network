@@ -4,7 +4,6 @@ import ProfileSideBar from "@/components/sections/ProfileSideBar";
 import PostCard from "@/components/modules/Posts/PostCard";
 import {
   Check,
-  ExternalLink,
   Mail,
 } from "lucide-react";
 import FloatingActionButton from "@/components/modules/FloatingActionButton";
@@ -310,9 +309,11 @@ function convertEmailToLink(text: string): string {
                       <img
                         onMouseEnter={() => {
                           setShowPreview(true);
+                          console.log(showPreview)
                         }}
                         onMouseLeave={() => {
                           setShowPreview(false);
+                          console.log(showPreview)
                         }}
                         src={user.profilePicture}
                         className="mx-auto rounded-full border-[7px] w-44 h-44 border-muted hover:opacity-50 dark:hover:opacity-25 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400"
@@ -442,8 +443,8 @@ function convertEmailToLink(text: string): string {
             </div>
             <div className="w-full h-[2px] bg-muted mt-5"></div>
             <div className={`profile-tabs bg-gray-200 sticky top-0 duration-300 z-[9999] dark:bg-gray-700 text-gray-800 dark:text-gray-200 my-3`}>
-        <ul className="flex justify-center md:gap-2">
-          <li className={`cursor-pointer hover:text-blue-500 duration-150 p-2 md:px-4 m-2 ${
+        <ul className="flex justify-center md:gap-1">
+          <li className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
             selectedTab === "Posts" && "bg-muted  font-bold hover:text-gray-500"
           }`}
           onClick={() =>{
@@ -456,7 +457,7 @@ function convertEmailToLink(text: string): string {
           }
           >Posts</li>
           <li
-            className={`cursor-pointer hover:text-blue-500 duration-150 p-2 md:px-4 m-2 ${
+            className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
               selectedTab === "Community Posts" && "bg-muted font-bold hover:text-gray-500"
             }`}
             onClick={() => {
@@ -471,7 +472,7 @@ function convertEmailToLink(text: string): string {
             Community Posts
           </li>
           <li
-            className={`cursor-pointer hover:text-blue-500 duration-150 p-2 md:px-4 m-2 ${
+            className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
               selectedTab === "Categories" && "bg-muted font-bold hover:text-gray-500"
             }`}
             onClick={() => {
@@ -484,8 +485,19 @@ function convertEmailToLink(text: string): string {
           >
             Categories
           </li>
+          <li className={`cursor-pointer hover:text-blue-500 duration-150 p-3  md:px-2 m-2
+            ${selectedTab === "Projects" && "bg-muted hover:text-gray-500 font-bold"}
+          `}
+          onClick={()=>{
+            if(selectedTab != "Projects") 
+              setSelectedTab("Projects")
+              else{
+                scrollToTop()
+              }
+          }}
+          >Projects</li>
           <li
-            className={`cursor-pointer hover:text-blue-500 duration-150 p-2 md:px-4 m-2 ${
+            className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
               selectedTab === "Saved Posts" && "bg-muted font-bold hover:text-gray-500"
             }`}
             onClick={() => {
@@ -500,7 +512,7 @@ function convertEmailToLink(text: string): string {
             Saved Posts
           </li>
           <li
-            className={`cursor-pointer hover:text-blue-500 duration-150 p-2 md:px-4 m-2 ${
+            className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
               selectedTab === "Liked Posts" && "bg-muted font-bold hover:text-gray-500"
             }`}
             onClick={() => {
@@ -513,20 +525,7 @@ function convertEmailToLink(text: string): string {
             }}
           >
             Liked Posts
-          </li>
-          {/* <li className={`cursor-pointer hover:text-blue-500 duration-150 p-2  md:px-4 m-2
-            ${selectedTab === "Projects" && "bg-muted hover:text-gray-500 font-bold"}
-          `}
-          onClick={()=>{
-            if(selectedTab != "Projects") 
-              setSelectedTab("Projects")
-              else{
-                scrollToTop()
-              }
-          }}
-          >Projects</li> */}
-          
-          
+          </li>          
         </ul>
       </div>
       {selectedTab == "Posts" && <div className="posts">

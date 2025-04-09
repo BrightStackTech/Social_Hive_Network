@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
 import { ArrowUp, ArrowDown, EllipsisVertical } from 'lucide-react';
@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Button } from "@/components/ui/button";
 import { Input } from '@/components/ui/input';
 import { HiOutlineReply } from 'react-icons/hi';
@@ -212,7 +212,7 @@ const ComCommentCard = ({ comment }: { comment: ComComment }) => {
 
   const handleConfirmEdit = async () => {
     try {
-      const response = await axios.put(`/api/v1/composts/comments/${comment._id}/edit`, {
+      await axios.put(`/api/v1/composts/comments/${comment._id}/edit`, {
         commentBody: editedCommentBody,
         isEdited: true,
       }, {

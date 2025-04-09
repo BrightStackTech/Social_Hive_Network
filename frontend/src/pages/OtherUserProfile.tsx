@@ -16,7 +16,7 @@ import {
   } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/context/AuthContext'
-import { ExternalLink } from "lucide-react";
+// import { ExternalLink } from "lucide-react";
 import PostCard from '@/components/modules/Posts/OthersPostCard'
 import FollowButton from '@/components/modules/FollowButton'
 import { useNavigate } from 'react-router-dom'
@@ -25,7 +25,7 @@ import { formatDistanceToNow } from 'date-fns'
 import { Separator } from '@/components/ui/separator'
 import MobileUserNavbar from '@/components/sections/MobileUserNavbar'
 import { Button } from '@/components/ui/button'
-import { createOrGetOneToOneChat, getAccountsToFollow } from '@/api/index';
+import { getAccountsToFollow } from '@/api/index';
 import axios from 'axios';
 import ComPostCard from '../components/modules/ComPostCard';
 import CategoryCard from "@/components/modules/CategoryCard";
@@ -264,9 +264,11 @@ if (!text) {
                     <img
                       onMouseEnter={() => {
                         setShowPreview(true);
+                        console.log(showPreview)
                       }}
                       onMouseLeave={() => {
                         setShowPreview(false);
+                        console.log(showPreview)
                       }}
                       src={otherUser.profilePicture}
                       className="mx-auto rounded-full border-[7px] w-44 h-44 border-muted hover:opacity-50 dark:hover:opacity-25 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400"

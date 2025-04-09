@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { createRepost, likePost, getUserGroups } from '@/api/index'
 import { useAuth } from '@/context/AuthContext'
 import { formatDistanceToNow } from 'date-fns';
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Check, ExternalLink, Mail } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+// import { Check, ExternalLink, Mail } from "lucide-react";
 import { toast } from 'react-toastify'
 import { FaLinkedin, FaReddit, FaFacebook, FaFacebookMessenger, FaRegBookmark } from 'react-icons/fa'
 import { FaSquareXTwitter } from 'react-icons/fa6'
@@ -15,7 +15,7 @@ import { GoLink } from 'react-icons/go'
 import { IoIosMail } from 'react-icons/io'
 import { PiThreadsLogoFill } from 'react-icons/pi'
 import { RiShare2Line, RiWhatsappFill, RiInstagramFill } from 'react-icons/ri'
-import { PostInterface } from '@/types'
+// import { PostInterface } from '@/types'
 import { Button } from '@/components/ui/button';
 import { BsChatTextFill } from 'react-icons/bs';
 import axios from 'axios';
@@ -37,7 +37,7 @@ const PostCard = ({otherUser, post, followCallback }:{otherUser:UserInterface|un
     const [isSaved, setIsSaved] = useState<boolean>(
       Array.isArray(post.savedBy) ? post.savedBy.includes(user?._id) : false
     );
-  const [openChatShareDialog, setOpenChatShareDialog] = useState(false);
+  // const [openChatShareDialog, setOpenChatShareDialog] = useState(false);
   const [chatSearch, setChatSearch] = useState("");
   const [followers, setFollowers] = useState<Array<{ _id: string; username: string; profilePicture: string; bio: string }>>([]);
   const [groups, setGroups] = useState<Array<{ _id: string; name: string; description: string; profilePicture: string }>>([]);

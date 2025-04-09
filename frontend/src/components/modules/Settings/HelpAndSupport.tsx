@@ -22,11 +22,11 @@ function HelpAndSupport() {
         <CardContent>
           <p className="text-sm text-muted-foreground">
             We're here to help. If you have any questions, please reach out
-            to us via email at socialhiveproject@gmail.com
+            to us via email at ${import.meta.env.VITE_SUPPORT_EMAIL}. We will get back to you as soon as possible.
           </p>
         </CardContent>
         <CardFooter>
-           <Link to={"https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=freetimerenderzz100@gmail.com&su=Requesting%20Support"} target="_blank"> <Button >Mail us</Button></Link>
+           <Link to={`https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=${import.meta.env.VITE_SUPPORT_EMAIL}&su=Requesting%20Support`} target="_blank"> <Button >Mail us</Button></Link>
         </CardFooter>
       </Card>
       <Card>
@@ -44,7 +44,7 @@ function HelpAndSupport() {
         </CardContent>
         
         <CardFooter>
-           <Link to={"https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=freetimerenderzz100@gmail.com&su=Feedback%20For%20The%20Campus%20Network"} target="_blank"> <Button >Mail us</Button></Link>
+           <Link to={`https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=${import.meta.env.VITE_SUPPORT_EMAIL}&su=Feedback%20For%20The%20Social%20Hive%20Network`} target="_blank"> <Button >Mail us</Button></Link>
         </CardFooter>
       </Card>
       <FAQ/>

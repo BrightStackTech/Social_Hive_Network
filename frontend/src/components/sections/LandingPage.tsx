@@ -1,9 +1,9 @@
 import {useState, MouseEvent} from 'react'
-import NavBar from './NavBar'
+// import NavBar from './NavBar'
 import { motion , useScroll,useMotionTemplate, useMotionValue } from "framer-motion";
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
-import { Info, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import { IoPersonAddOutline } from 'react-icons/io5';
 import { FlipWords } from '../ui/flip-words';
 import FeaturesSectionDemo from '../blocks/FeatureSection';
@@ -37,7 +37,7 @@ const LandingPage = () => {
     
 
   return (
-    <div className=' h-screen overflow-hidden' >
+    <div className=' h-screen ' >
       
            <div
       className="group flex flex-col lg:flex-row  items-center p-5 min-h-screen relative rounded-xl border border-white/10 bg-slate-300 dark:bg-gray-900 px-8 py-16 shadow-2xl "

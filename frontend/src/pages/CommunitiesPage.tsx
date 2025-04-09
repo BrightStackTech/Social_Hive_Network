@@ -20,9 +20,9 @@ const CommunitiesPage = () => {
   const startY = useRef(0);
   const [pulling, setPulling] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchLoading, setSearchLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
+  const [searchResults] = useState([]);
+  const [searchLoading] = useState(false);
+  const [searched] = useState(false);
   const navigate = useNavigate();
   const [joinedCommunities, setJoinedCommunities] = useState<any[]>([]);
   const [searchQuery1, setSearchQuery1] = useState('');
@@ -222,7 +222,7 @@ const CommunitiesPage = () => {
           )}
           {!searched && joinedCommunityPosts.length > 0 && (
             <div>
-              {joinedCommunityPosts.map((post, index) => (
+              {joinedCommunityPosts.map((post) => (
                 <ComPostCard key={post._id} post={post} />
               ))}
             </div>

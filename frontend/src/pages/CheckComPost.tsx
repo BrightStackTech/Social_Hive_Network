@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MdComment, MdModeEdit, MdDelete, MdClose } from 'react-icons/md';
+import { MdComment, MdModeEdit, MdDelete} from 'react-icons/md';
 import { ArrowUp, ArrowDown, EllipsisVertical } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import axios from 'axios';
@@ -31,7 +31,7 @@ const CheckComPost = () => {
   const [comment, setComment] = useState('');
   const [commentLoading, setCommentLoading] = useState(false);
   const [error, setError] = useState('');
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const userId = user?._id ?? '';
   const scrollableDiv = useRef<HTMLDivElement>(null);
@@ -248,7 +248,7 @@ const CheckComPost = () => {
 
   const handleConfirmEdit = async () => {
     try {
-      const response = await axios.put(`/api/v1/composts/${post._id}/edit`, {
+      await axios.put(`/api/v1/composts/${post._id}/edit`, {
         title: editedTitle,
         description: editedDescription,
         media: editedMedia,

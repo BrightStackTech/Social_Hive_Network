@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ArrowUp, ArrowDown, EllipsisVertical } from 'lucide-react';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { Dialog, DialogContent, DialogTitle, DialogTrigger, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 
 export interface ComReply {
@@ -155,7 +155,7 @@ const ComReplyCard = ({ reply }: { reply: ComReply }) => {
 
   const handleConfirmEdit = async () => {
     try {
-      const response = await axios.put(`/api/v1/composts/replies/${reply._id}/edit`, {
+      await axios.put(`/api/v1/composts/replies/${reply._id}/edit`, {
         replyBody: editedReplyBody,
         isEdited: true,
       }, {
@@ -166,6 +166,7 @@ const ComReplyCard = ({ reply }: { reply: ComReply }) => {
 
       setIsEditing(false);
       setIsEdited(true);
+      console.log(isEdited);
       setIsConfirmDialogOpen(false);
       setError('');
       window.location.reload(); // Reload the page after the edit is confirmed

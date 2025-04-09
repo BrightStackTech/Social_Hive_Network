@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
@@ -31,7 +31,7 @@ const CheckUserUpdatePage = () => {
   const [progress, setProgress] = useState(0);
   const [viewers, setViewers] = useState<Viewer[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpen] = useState(false);
   const [timer, setTimer] = useState<null | NodeJS.Timeout>(null);
   const [interval, setIntervalState] = useState<NodeJS.Timeout | null>(null);
 

@@ -109,7 +109,7 @@ const CommunityProfilePage: React.FC = () => {
     fetchCompostsByCommunityName();
   }, [decodedCommunityName, navigate, user?.token]);
 
-  const handleJoinLeave = (communityName: any) => {
+  const handleJoinLeave = (_communityName: any) => {
     const fetchCommunity = async () => {
       try {
         const response = await axios.get(`/api/v1/communities/${decodedCommunityName}`);

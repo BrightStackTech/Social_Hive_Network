@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdComment, MdModeEdit, MdDelete } from 'react-icons/md';
 import { ArrowUp, ArrowDown, EllipsisVertical } from 'lucide-react';
-import { BsChatTextFill, BsThreeDotsVertical } from 'react-icons/bs';
+import { BsChatTextFill } from 'react-icons/bs';
 import { formatDistanceToNow } from 'date-fns';
 import axios from 'axios';
 import { useAuth } from '@/context/AuthContext';
@@ -20,7 +20,7 @@ import { FaSquareXTwitter } from 'react-icons/fa6';
 import { GoLink } from 'react-icons/go';
 import { IoIosMail } from 'react-icons/io';
 import { PiThreadsLogoFill } from 'react-icons/pi';
-import { RiShare2Line, RiWhatsappFill, RiInstagramFill } from 'react-icons/ri';
+import { RiWhatsappFill, RiInstagramFill } from 'react-icons/ri';
 import { toast } from 'react-toastify';
 import { getUserGroups } from '@/api/index';
 
@@ -54,8 +54,8 @@ const ComPostCard = ({ post }: { post: ComPost }) => {
   const userId = user?._id ?? '';
   const [upvoted, setUpvoted] = useState(post.upvotedBy?.includes(userId) || false);
   const [downvoted, setDownvoted] = useState(post.downvotedBy?.includes(userId) || false);
-  const [comments, setComments] = useState(post.comments?.length || 0);
-  const [showMenu, setShowMenu] = useState(false);
+  // const [comments, setComments] = useState(post.comments?.length || 0);
+  // const [showMenu, setShowMenu] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -201,7 +201,7 @@ const ComPostCard = ({ post }: { post: ComPost }) => {
 
   const handleConfirmEdit = async () => {
     try {
-      const response = await axios.put(`/api/v1/composts/${post._id}/edit`, {
+      await axios.put(`/api/v1/composts/${post._id}/edit`, {
         title: editedTitle,
         description: editedDescription,
         media: editedMedia,

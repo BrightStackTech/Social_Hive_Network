@@ -39,7 +39,7 @@ As this is a personal project, I am not responsible for any downtime, data loss,
 <div className="text-lg">6. Changes to Terms</div>
 These terms may change over time, and users will be notified of any updates.
 
-<div className="text-lg font-semibold">If you have any questions or issues, please contact <Link className="text-blue-500" to="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=socialhiveproject@gmail.com">socialhiveproject@gmail.com</Link></div>
+        <div className="text-lg font-semibold">If you have any questions or issues, please contact <Link className="text-blue-500" to={`https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=${import.meta.env.VITE_SUPPORT_EMAIL}`}>${import.meta.env.VITE_SUPPORT_EMAIL}</Link></div>
         </div>
         <Separator/>
        <Footer/>

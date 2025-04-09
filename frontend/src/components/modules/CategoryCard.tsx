@@ -81,7 +81,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick })
   // Share Dialog state – opens when Share button is clicked
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
   // Nested dialog state for Share in Chat
-  const [isShareChatDialogOpen, setIsShareChatDialogOpen] = useState(false);
+  // const [isShareChatDialogOpen, setIsShareChatDialogOpen] = useState(false);
   // For share in chat search (placeholder)
   const [chatSearch, setChatSearch] = useState('');
   // Dropdown menu open state

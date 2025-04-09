@@ -9,7 +9,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  CategoryScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 

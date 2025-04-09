@@ -4,12 +4,12 @@ import { createPost } from '@/api/index';
 import { toast } from 'react-toastify';
 import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import { Dialog, DialogContent, DialogClose, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
-import {
-  Check,
-  ExternalLink,
-  Mail,
-} from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger} from '@/components/ui/dialog';
+// import {
+//   Check,
+//   ExternalLink,
+//   Mail,
+// } from "lucide-react";
 import { FaTimes } from 'react-icons/fa';  // Make sure you have react-icons installed.
 import Loader from '@/components/Loader'; // Ensure the correct path and case sensitivity
 

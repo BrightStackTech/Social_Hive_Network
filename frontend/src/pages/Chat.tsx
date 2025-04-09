@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSocket } from '@/context/SocketContext';
-import { getAllChats, sendMessage, getAllMessages, deleteMessage, deleteChat, sendMessageToFollower, sendMessageToGroup, getAccountsToFollow } from '@/api/index';
+import { getAllChats, sendMessage, getAllMessages, deleteMessage, deleteChat, sendMessageToFollower, sendMessageToGroup, } from '@/api/index';
 import { ArrowLeft, EllipsisVertical } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
@@ -15,8 +15,7 @@ import {
   FaFileAudio, FaFileVideo, FaFilePowerpoint,
   FaFileExcel, FaSpinner, FaCheckDouble, FaFile,
   FaMicrophone, FaStop, FaPlay, FaPause, FaRecordVinyl, FaSearch, FaArrowUp,
-  FaArrowDown, FaPhoneAlt, FaCamera,
-  FaVideo, FaFolderOpen
+  FaArrowDown, FaCamera, FaFolderOpen
 } from 'react-icons/fa';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
@@ -37,10 +36,10 @@ import {
 import { ChatEventEnums } from '@/constants';
 import MobileUserNavbar from '@/components/sections/MobileUserNavbar';
 import { toast } from 'react-toastify';
-import parse from 'html-react-parser';
+// import parse from 'html-react-parser';
 import axios from 'axios';
-import { Dialog, DialogContent, DialogClose, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
-import { format, formatDistanceToNow } from 'date-fns';
+import { Dialog, DialogContent,  DialogTrigger, } from '@/components/ui/dialog';
+import { formatDistanceToNow } from 'date-fns';
 import AWS from 'aws-sdk/global';
 import S3 from 'aws-sdk/clients/s3';
 import { getFollowers, createOrGetOneToOneChat } from '@/api/index';
@@ -763,8 +762,8 @@ const decodeUrlFromRandomNumbers = (encodedUrl: string): string => {
         if (fileName != null) {
           const cleanedFileName = fileName.replace(/^\d+_/, '');
           const fileNamePattern = new RegExp(`filename=([^&]+)`);
-          const match = fileNamePattern.exec(url);
-          const displayName = match ? decodeURIComponent(match[1]) : cleanedFileName;
+          const _match = fileNamePattern.exec(url);
+          const displayName = _match ? decodeURIComponent(_match[1]) : cleanedFileName;
           //const fileIcon = getFileIcon(fileName);
           const fileIconHtml = getFileIconHtml(fileName, 'large');
           return `
@@ -793,9 +792,9 @@ const decodeUrlFromRandomNumbers = (encodedUrl: string): string => {
       return "";
       })
     replacedText = replacedText.replace(emailPattern, '<a href="https://mail.google.com/mail/?view=cm&fs=1&to=$1" target="_blank" class="text-blue-500 underline">$1</a>')
-        .replace(mentionPattern, (match, p1, p2) => {
+        .replace(mentionPattern, (_match, p1, p2) => {
       const username = p2.slice(1); // Remove the '@' symbol
-      const ouserlink = `${import.meta.env.VITE_CLIENT_UR}/user/${username}`
+      const ouserlink = `${import.meta.env.VITE_CLIENT_URL}/user/${username}`
       const nuserlink = encodeUrlToRandomNumbers(ouserlink);
       return `${p1}<a href="/" target="_blank" class="text-blue-500 underline cursor-pointer" onClick="handleClickLink('${nuserlink}')">${p2}</a>`;
     });
@@ -813,7 +812,8 @@ window.handleViewFile = async function(url: string, fileName: string) {
     } else {
         window.open(url, '_blank');
     }
-}
+  }
+  
 
 window.downloadFile = async function(url: string, fileName: string) {
     const response = await fetch(url);
@@ -1036,6 +1036,7 @@ const handlePlayPauseAudio = () => {
     } else {
       setUnreadMessages((prev) => [...prev, data]);
       setUnreadChats((prev) => new Set(prev).add(data.chat));
+      console.log(unreadChats);
     }
   };
 
@@ -1067,7 +1068,12 @@ const handlePlayPauseAudio = () => {
   };
 
   const renderAsLinkOrEmailOrImgs = (text: string) => {
-  
+    
+    // Helper to truncate a URL if too long
+    const truncateLink = (url: string, maxLength: number): string => {
+      return url.length > maxLength ? url.slice(0, maxLength) + "..." : url;
+    };
+
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/g;
     const s3Pattern = new RegExp(`https://${import.meta.env.VITE_AWS_BUCKET_NAME}.s3.${import.meta.env.VITE_AWS_REGION}.amazonaws.com/[-A-Z0-9+&@#\/%?=~_|!:,.;]*`, 'gi');
@@ -1103,13 +1109,11 @@ const handlePlayPauseAudio = () => {
 
     if (s3Pattern.test(text)) { 
       const fileName = decodeURIComponent(text.split('/').pop() || '');
-        //console.log(fileName);
-          const cleanedFileName = fileName.replace(/^\d+_/, '');
-          const fileNamePattern = new RegExp(`filename=([^&]+)`);
-          const match = fileNamePattern.exec(text);
-          const displayName = match ? decodeURIComponent(match[1]) : cleanedFileName;
-          //const fileIcon = getFileIcon(fileName);
-          const fileIconHtml = getFileIconHtml(fileName, 'small');
+      const cleanedFileName = fileName.replace(/^\d+_/, '');
+      const fileNamePattern = new RegExp(`filename=([^&]+)`);
+      const match = fileNamePattern.exec(text);
+      const displayName = match ? decodeURIComponent(match[1]) : cleanedFileName;
+      const fileIconHtml = getFileIconHtml(fileName, 'small');
       return (
         <span>
           <span dangerouslySetInnerHTML={{ __html: fileIconHtml }} style={{ marginRight: '5px' }}/> {displayName}
@@ -1120,12 +1124,19 @@ const handlePlayPauseAudio = () => {
     if (emails && emails.length > 0) {
       return emails[0];
     } else if (urls && urls.length > 0) {
-      return urls[0];
+      // For plain URLs, return a truncated link.
+      const url = urls[0];
+      return (
+        <div
+        >
+          {truncateLink(url, 30)}
+        </div>
+      );
     } else {
       return text;
     }
   };
-
+  
   const handleDownloadImage = async (url: string) => {
     try {
       // Remove any transformations from the Cloudinary URL to get the original image
@@ -1179,12 +1190,12 @@ const handlePlayPauseAudio = () => {
     }
   };
 
-  const handleTyping = () => {
-    if (!isTyping && socket) {
-      setIsTyping(true);
-      socket.emit(ChatEventEnums.TYPING_EVENT, { chatId: currentChat.current?._id, userId: user?._id });
-    }
-  };
+  // const handleTyping = () => {
+  //   if (!isTyping && socket) {
+  //     setIsTyping(true);
+  //     socket.emit(ChatEventEnums.TYPING_EVENT, { chatId: currentChat.current?._id, userId: user?._id });
+  //   }
+  // };
 
   useEffect(() => {
     const typingTimeout = setTimeout(handleStopTyping, 3000); // Adjust the timeout as needed
@@ -1266,12 +1277,14 @@ const handlePlayPauseAudio = () => {
         socket.on('userOnline', (userId: string) => {
           if (userId === receiverId) {
             setIsReceiverOnline(true);
+            console.log(isReceiverOnline);
           }
         });
 
         socket.on('userOffline', (userId: string) => {
           if (userId === receiverId) {
             setIsReceiverOnline(false);
+            console.log(isReceiverOnline);
           }
         });
       }
@@ -1341,6 +1354,40 @@ useEffect(() => {
   sendMessageFromUrl();
 }, [username, navigate]);
   
+const dynamicPlaceholders = [
+  "Type a message...",
+  "Try @hiveai followed by a question..."
+];
+const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
+
+// This state holds the text that’s currently displayed as a custom placeholder.
+const [animatedPlaceholder, setAnimatedPlaceholder] = useState(dynamicPlaceholders[0]);
+// This state will hold the animation class during transitions.
+const [animationClass, setAnimationClass] = useState("");
+
+// Trigger the change in currentPlaceholder every 5 seconds:
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentPlaceholder((prev) => (prev + 1) % dynamicPlaceholders.length);
+  }, 5000);
+  return () => clearInterval(interval);
+}, []);
+
+// When currentPlaceholder changes, animate out the old text then animate in the new text.
+useEffect(() => {
+  if (dynamicPlaceholders[currentPlaceholder] !== animatedPlaceholder) {
+    // Start the cube-out animation:
+    setAnimationClass("cube-out");
+    setTimeout(() => {
+      // Swap the text and animate in:
+      setAnimatedPlaceholder(dynamicPlaceholders[currentPlaceholder]);
+      setAnimationClass("cube-in");
+      setTimeout(() => {
+        setAnimationClass("");
+      }, 500);
+    }, 500);
+  }
+}, [currentPlaceholder, dynamicPlaceholders, animatedPlaceholder]);
   
   
   return (
@@ -1408,7 +1455,7 @@ useEffect(() => {
                           <EllipsisVertical className='min-w-fit' />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                          <DropdownMenuItem onClick={() => handleViewProfile(chatDetails)}>View Profile</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleViewProfile(chatDetails)}>View Chat</DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem onClick={(e) => handleDeleteChat(e, chat)}>Delete</DropdownMenuItem>
                         </DropdownMenuContent>
@@ -1467,7 +1514,6 @@ useEffect(() => {
     <DocumentList links={documentLinks} />
   </DialogContent>
 </Dialog>
-            {isDocumentBoxOpen && <DocumentList links={documentLinks} />}
             <Button onClick={handleSearchClick} variant={"ghost"} style={{position: 'fixed', right: '20px', }}>
                 <FaSearch style={{ width: '20px', height: '20px' }}/>
             </Button>
@@ -1663,7 +1709,23 @@ useEffect(() => {
               )}
               <div className='flex items-center w-full'>
                 <div className='flex-grow'>
-                  <Input maxLength={MESSAGE_LENGTH_LIMIT} onKeyDown={(e) => { if (e.key == 'Enter') handleSendMessage() }} value={message} className={`${message.length == MESSAGE_LENGTH_LIMIT ? 'border-red-500' : ''}`} onChange={(e) => setMessage(e.target.value)} placeholder='Type a message...' />
+                  <Input 
+                    maxLength={MESSAGE_LENGTH_LIMIT} 
+                    onKeyDown={(e) => { if (e.key == 'Enter') handleSendMessage() }} 
+                    value={message} 
+                    className={`${message.length == MESSAGE_LENGTH_LIMIT ? 'border-red-500' : ''}`} 
+                    onChange={(e) => setMessage(e.target.value)} 
+                    placeholder="" // clear native placeholder
+                    disabled={selectedMedia.length > 0 || selectedFile !== null || recordedAudio !== null}
+                  />
+                  {/* Show custom animated placeholder only if message is empty */}
+                  {!message && (
+                    <div className="absolute inset-0 text-gray-400 flex items-center px-5 pointer-events-none">
+                      <span className={animationClass}>
+                        {animatedPlaceholder}
+                      </span>
+                    </div>
+                  )}
                 </div>                  
                 <div className='flex items-center'>
                   <div className='min-w-fit text-xs text-muted-foreground ml-2'>

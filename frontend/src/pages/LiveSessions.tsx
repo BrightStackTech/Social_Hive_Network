@@ -1,18 +1,18 @@
-import { useAuth } from '@/context/AuthContext';
+// import { useAuth } from '@/context/AuthContext';
 import { MeetingProvider } from "@videosdk.live/react-sdk";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { MeetingAppProvider } from "@/MeetingAppContextDef";
 import { MeetingContainer } from "@/meeting/MeetingContainer.jsx";
 import { LeaveScreen } from "@/components/screens/LeaveScreen.jsx";
 import { JoiningScreen } from "@/components/screens/JoiningScreen.jsx";
 import MobileUserNavbar from '@/components/sections/MobileUserNavbar.jsx';
-import ProfileSideBar from '@/components/sections/ProfileSideBar';
-import { useNavigate } from 'react-router-dom';
+// import ProfileSideBar from '@/components/sections/ProfileSideBar';
+// import { useNavigate } from 'react-router-dom';
 
 function LiveSessions() {
   document.title = 'SocialHive - Live Sessions';
-  const { user } = useAuth();
-  const navigate = useNavigate();
+  // const { user } = useAuth();
+  // const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [meetingId, setMeetingId] = useState("");
   const [participantName, setParticipantName] = useState("");
@@ -22,7 +22,7 @@ function LiveSessions() {
   const [customVideoStream, setCustomVideoStream] = useState<MediaStream | undefined>(undefined);
   const [isMeetingStarted, setMeetingStarted] = useState(false);
   const [isMeetingLeft, setIsMeetingLeft] = useState(false);
-  const contentDivRef = useRef<HTMLDivElement>(null);
+  // const contentDivRef = useRef<HTMLDivElement>(null);
 
   const isMobile = window.matchMedia("only screen and (max-width: 768px)").matches;
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { FaTimes } from 'react-icons/fa';
 import axios from 'axios';
@@ -8,9 +8,7 @@ import Loader from '@/components/Loader';
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
   DialogTitle,
-  DialogClose
 } from '@/components/ui/dialog';
 
 function CreateUpdatesModal() {

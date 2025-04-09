@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Globe,
   EllipsisVertical,
@@ -10,7 +10,7 @@ import {
 import { UserInterface } from "@/context/AuthContext";
 import { formatDistanceToNow } from "date-fns";
 import { PostInterface } from "@/types";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import {
   createRepost,
@@ -33,11 +33,11 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Check, ExternalLink, Mail } from "lucide-react";
+// import { Check, ExternalLink, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
 import { RiShare2Line, RiWhatsappFill, RiInstagramFill } from "react-icons/ri";
-import { FaRegBookmark, FaLinkedin, FaReddit, FaFacebook, FaFacebookMessenger, FaPinterest } from "react-icons/fa";
+import { FaRegBookmark, FaLinkedin, FaReddit, FaFacebook, FaFacebookMessenger } from "react-icons/fa";
 import { GoLink } from "react-icons/go";
 import { PiThreadsLogoFill } from "react-icons/pi";
 import { IoIosMail } from "react-icons/io";
@@ -70,8 +70,7 @@ export interface PostCardProps {
 const PostCard = ({ postedUser, post, refreshFunc }: PostCardProps) => {
   const navigate = useNavigate();
   const { user, token } = useAuth();
-
-  const [showPreview, setShowPreview] = useState(false);
+  // const [showPreview, setShowPreview] = useState(false);
   const [readMore, setReadMore] = useState(false);
     const [reposted, setReposted] = useState<boolean>(
       Array.isArray(post.repostedBy) && user && user._id
@@ -576,6 +575,7 @@ useEffect(() => {
                               const shareUrl = `/chat/${follower.username}/share?text=Check%20this%20post%20from%20%40${post.createdBy?.username}%20%3A&title=${post.title}&description=${postDescription}&url=${window.location.origin}/post/${post._id}`;
                               navigate(shareUrl);
                               setOpenChatShareDialog(false);
+                              console.log(openChatShareDialog);
                             }}
                           >
                             <img

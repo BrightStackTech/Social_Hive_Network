@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ComSearchBar from '@/components/modules/ComSearchBar';
 import { useAuth } from '@/context/AuthContext';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import JoinLeaveButton from '@/components/modules/JoinLeaveButton';
 
@@ -39,9 +39,9 @@ const CommunityNotFound: React.FC = () => {
     <div className="flex w-full">
       <div className="flex flex-col items-center w-full lg:w-2/3">
         <nav className="flex justify-between items-center p-4 bg-muted w-full border-0 border-b-2 border-muted-foreground">
-          <ComSearchBar onChange={function (e: React.ChangeEvent<HTMLInputElement>): void {
+          <ComSearchBar onChange={function (_e: React.ChangeEvent<HTMLInputElement>): void {
             throw new Error('Function not implemented.');
-          } } onSubmit={function (e: React.FormEvent<HTMLFormElement>): void {
+          } } onSubmit={function (_e: React.FormEvent<HTMLFormElement>): void {
             throw new Error('Function not implemented.');
           } } />
         </nav>

@@ -6,8 +6,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import { Dialog, DialogContent, DialogClose, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
-import { FaTimes } from 'react-icons/fa';
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
 import { useAuth } from '@/context/AuthContext';
 
 interface CreateCommunityModalProps {
@@ -59,6 +58,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({ onClose }) 
       };
       reader.readAsDataURL(file);
       setProfilePicture(file);
+      console.log(profilePicture);
     }
   };
 

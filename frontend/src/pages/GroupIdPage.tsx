@@ -173,7 +173,7 @@ function GroupIdPage() {
         <div className="group-stats flex justify-center gap-4 mt-4 text-gray-700 dark:text-gray-300">
           <span>Members: {group.members.length}</span>
           {/* <span>Posts: {group.posts.length}</span> */}
-          {/* <span>Projects: {group.projects.length}</span> */}
+          <span>Projects: {group.projects.length}</span>
         </div>
             <div className="grid grid-cols-2 md:flex justify-center items-center gap-5">
           
@@ -310,17 +310,6 @@ function GroupIdPage() {
           }
           }
           >Announcements</li> */}
-          {/* <li className={`cursor-pointer hover:text-blue-500 duration-150 p-2  md:px-4 m-2
-            ${selectedTab === "Projects" && "bg-muted hover:text-gray-500 font-bold"}
-          `}
-          onClick={()=>{
-            if(selectedTab != "Projects") 
-              setSelectedTab("Projects")
-              else{
-                scrollToTop()
-              }
-          }}
-          >Projects</li> */}
           <li className={`cursor-pointer hover:text-blue-500 duration-150  p-2  md:px-4 m-2
             ${selectedTab === "Members" && "bg-muted hover:text-gray-500 font-bold"}
           `}
@@ -332,6 +321,17 @@ function GroupIdPage() {
               }
           }}
           >Members</li>
+          <li className={`cursor-pointer hover:text-blue-500 duration-150 p-2  md:px-4 m-2
+            ${selectedTab === "Projects" && "bg-muted hover:text-gray-500 font-bold"}
+          `}
+          onClick={()=>{
+            if(selectedTab != "Projects") 
+              setSelectedTab("Projects")
+              else{
+                scrollToTop()
+              }
+          }}
+          >Projects</li>
           {(group.admin._id == user._id) && <li className={`cursor-pointer hover:text-blue-500 duration-150 p-2  md:px-4 m-2
             ${selectedTab === "Settings" && "bg-muted hover:text-gray-500 font-bold"}
           `}
