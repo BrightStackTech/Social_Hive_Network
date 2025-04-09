@@ -24,7 +24,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({ onClose }) 
   const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
   const cropperRef = useRef<ReactCropperElement>(null);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { token } = useAuth();
 
   useEffect(() => {
     const checkCommunityNameUnique = async () => {
@@ -98,13 +98,13 @@ const handleCreateCommunity = async () => {
       profilePictureUrl = cloudinaryResponse.secure_url;
     }
 
-    const response = await axios.post('/api/v1/communities/create-community', {
+    const response = await axios.post(`${import.meta.env.VITE_SERVER_URI}/communities/create-community`, {
       communityName: name,
       description,
       profilePicture: profilePictureUrl,
     }, {
       headers: {
-        Authorization: `Bearer ${user?.token}`, // Include the authentication token in the request headers
+        Authorization: `Bearer ${token}`, // Include the authentication token in the request headers
       },
     });
     console.log('Community created:', response.data);
