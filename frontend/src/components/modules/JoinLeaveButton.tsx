@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const JoinLeaveButton = ({ className, communityName, isJoined, onJoinLeave, isRemoved, isPending }: { className?: string, communityName: string, isJoined: boolean, onJoinLeave: (communityName: string) => void, isRemoved: boolean, isPending: boolean }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const { user } = useAuth();
+  const {token} = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -17,30 +17,30 @@ const JoinLeaveButton = ({ className, communityName, isJoined, onJoinLeave, isRe
     setIsLoading(true);
     try {
       if (isJoined) {
-        await axios.post(`/api/v1/communities/${communityName}/leave`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/communities/${communityName}/leave`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         onJoinLeave(communityName);
       } else if (isRemoved) {
-        await axios.post(`/api/v1/communities/${communityName}/send-join-request`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/communities/${communityName}/send-join-request`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         onJoinLeave(communityName);
       } else if (isPending) {
-        await axios.post(`/api/v1/communities/${communityName}/cancel-join-request`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/communities/${communityName}/cancel-join-request`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         onJoinLeave(communityName);
       } else {
-        await axios.post(`/api/v1/communities/${communityName}/join`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/communities/${communityName}/join`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         navigate(`/communities/c/${communityName}`);
