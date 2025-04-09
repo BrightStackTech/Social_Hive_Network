@@ -27,7 +27,7 @@ A platform designed to foster community and collaboration among students from va
 
 ## Acknowledgments 🎉
 
-- [Yog Vasaikar](https://github.com/freakynutzz100)for his insightful backend.
+- [Yog Vasaikar](https://github.com/freakynutzz100) for his insightful backend.
 - [Preeth Kothari](https://github.com/KTFREE) for his platform, vite, frontend, for styling.
 
 ## Contributing 🤝
