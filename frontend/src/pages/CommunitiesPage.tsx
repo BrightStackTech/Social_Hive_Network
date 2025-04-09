@@ -67,7 +67,7 @@ const CommunitiesPage = () => {
             Authorization: `Bearer ${user?.token}`,
           },
         });
-        setJoinedCommunities(response.data.data);
+        setJoinedCommunities(response.data.data || []);
       } catch (error) {
         console.error('Error fetching joined communities:', error);
       }
