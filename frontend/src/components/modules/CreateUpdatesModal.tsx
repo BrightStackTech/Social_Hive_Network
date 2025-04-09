@@ -75,7 +75,7 @@ function CreateUpdatesModal() {
         postedBy: user?._id, // Ensure this is the user's ID
       };
 
-      await axios.post(`${import.meta.env.VITE_CLIENT_UR}/api/v1/updates`, payload, {
+      await axios.post(`/api/v1/updates`, payload, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
         },
