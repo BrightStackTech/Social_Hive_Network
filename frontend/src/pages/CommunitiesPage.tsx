@@ -12,7 +12,7 @@ import LoadingWheel from '@/components/ui/LoadingWheel'; // Import LoadingWheel
 import Loader from '@/components/Loader';
 
 const CommunitiesPage = () => {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const [unjoinedCommunities, setUnjoinedCommunities] = useState<any[]>([]);
   const [communitiesFeed, setCommunitiesFeed] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ const CommunitiesPage = () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/unjoined-communities`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setUnjoinedCommunities(response.data.data || []);
@@ -48,7 +48,7 @@ const CommunitiesPage = () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/composts/user-feed`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setCommunitiesFeed(response.data);
@@ -63,7 +63,7 @@ const CommunitiesPage = () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/joined-communities`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setJoinedCommunities(response.data.data || []);
@@ -75,7 +75,7 @@ const CommunitiesPage = () => {
     fetchUnjoinedCommunities();
     fetchJoinedCommunities();
     fetchCommunitiesFeed();
-  }, [user?.token]);
+  }, [token]);
 
   const handleJoinLeave = (communityName: string) => {
     setUnjoinedCommunities(prev => prev.filter(community => community.communityName !== communityName));
