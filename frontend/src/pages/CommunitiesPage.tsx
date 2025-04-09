@@ -33,7 +33,7 @@ const CommunitiesPage = () => {
 
     const fetchUnjoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/unjoined-communities', {
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/communities/unjoined-communities`, {
           headers: { Authorization: `Bearer ${user?.token}` },
         });
         console.log("Unjoined communities response:", response.data);
@@ -66,7 +66,7 @@ const CommunitiesPage = () => {
     
   const fetchJoinedCommunities = async () => {
     try {
-      const response = await axios.get('/api/v1/communities/joined-communities', {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/communities/joined-communities`, {
         headers: { Authorization: `Bearer ${user?.token}` },
       });
       console.log("Joined communities response:", response.data);
