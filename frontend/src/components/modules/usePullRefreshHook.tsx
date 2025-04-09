@@ -109,7 +109,7 @@ function addPullIndicator(el: HTMLDivElement) {
 
   // Create a span element for the arrow
   const arrowSpan = document.createElement("span");
-  arrowSpan.innerHTML = FaArrowDown({}).props.children[0].props.d; // This gets the SVG path
+  arrowSpan.innerHTML = (FaArrowDown({}) as any).props.children[0].props.d;
   arrowSpan.style.display = 'inline-block';
   arrowSpan.style.width = '20px';
   arrowSpan.style.height = '20px';
