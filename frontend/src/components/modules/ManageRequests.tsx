@@ -22,7 +22,7 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
   useEffect(() => {
     const fetchPendingRequests = async () => {
       try {
-        const response = await axios.get(`/api/v1/communities/${communityName}/pending-requests`, {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/${communityName}/pending-requests`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -54,7 +54,7 @@ const ManageRequests = ({ communityName }: { communityName: string }) => {
 
   const handleRequestAction = async (_id: string, { userId, action }: HandleRequestActionParams): Promise<void> => {
     try {
-      await axios.post(`/api/v1/communities/${communityName}/handle-join-request/${userId}/${action}`, {}, {
+      await axios.post(`${import.meta.env.VITE_SERVER_URI}/communities/${communityName}/handle-join-request/${userId}/${action}`, {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
