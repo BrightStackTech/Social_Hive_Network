@@ -45,18 +45,19 @@ const CommunitiesPage = () => {
     };
 
     const fetchCommunitiesFeed = async () => {
-      try {
-        const response = await axios.get('/api/v1/composts/user-feed', {
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-          },
-        });
-        setCommunitiesFeed(response.data);
-      } catch (error) {
-        console.error('Error fetching communities feed:', error);
-      } finally {
-        setLoading(false);
-      }
+        try {
+            const response = await axios.get('/api/v1/composts/user-feed', {
+                headers: {
+                    Authorization: `Bearer ${user?.token}`,
+                },
+            });
+            const feedData = response.data.data ? response.data.data : response.data;
+            setCommunitiesFeed(Array.isArray(feedData) ? feedData : []);
+        } catch (error) {
+            console.error('Error fetching communities feed:', error);
+        } finally {
+            setLoading(false);
+        }
     };
     
     const fetchJoinedCommunities = async () => {
