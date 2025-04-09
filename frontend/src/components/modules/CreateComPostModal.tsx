@@ -94,10 +94,9 @@ const CreateComPostModal: React.FC<CreateComPostModalProps> = ({ onClose }) => {
         const response = await axios.get('/api/v1/communities/joined-communities', {
           headers: { Authorization: `Bearer ${user?.token}` },
         });
-        setCommunities(Array.isArray(response.data.data) ? response.data.data : []);
+        setCommunities(response.data.data);
       } catch (error) {
         console.error('Error fetching joined communities:', error);
-        setCommunities([]);
       }
     };
     fetchJoinedCommunities();
