@@ -33,7 +33,7 @@ const CommunitiesPage = () => {
 
     const fetchUnjoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/unjoined-communities', {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/unjoined-communities`, {
           headers: {
             Authorization: `Bearer ${user?.token}`,
           },
@@ -46,7 +46,7 @@ const CommunitiesPage = () => {
 
     const fetchCommunitiesFeed = async () => {
         try {
-            const response = await axios.get('/api/v1/composts/user-feed', {
+            const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/composts/user-feed`, {
                 headers: {
                     Authorization: `Bearer ${user?.token}`,
                 },
@@ -62,7 +62,7 @@ const CommunitiesPage = () => {
     
     const fetchJoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/joined-communities', {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/joined-communities`, {
           headers: {
             Authorization: `Bearer ${user?.token}`,
           },
