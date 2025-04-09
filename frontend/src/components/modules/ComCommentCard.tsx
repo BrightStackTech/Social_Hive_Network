@@ -38,7 +38,7 @@ export interface ComComment {
 }
 
 const ComCommentCard = ({ comment }: { comment: ComComment }) => {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const userId = user?._id ?? '';
   const [upvoted, setUpvoted] = useState(comment.upvotedBy?.includes(userId) || false);
   const [downvoted, setDownvoted] = useState(comment.downvotedBy?.includes(userId) || false);
@@ -65,9 +65,9 @@ const ComCommentCard = ({ comment }: { comment: ComComment }) => {
   useEffect(() => {
     const fetchReplies = async () => {
       try {
-        const response = await axios.get(`/api/v1/composts/comments/${comment._id}/replies`, {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/replies`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setReplies(response.data);
@@ -77,12 +77,12 @@ const ComCommentCard = ({ comment }: { comment: ComComment }) => {
     };
 
     fetchReplies(); // Fetch replies when the component mounts
-  }, [comment._id, user?.token]);
+  }, [comment._id, token]);
 
   useEffect(() => {
     const fetchCommunityAdmin = async () => {
       try {
-        const response = await axios.get(`/api/v1/communities/${comment.community?.communityName}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/${comment.community?.communityName}`);
         const community = response.data.data;
         setIsAdmin(community.admin._id === userId);
       } catch (error) {
@@ -100,26 +100,26 @@ const ComCommentCard = ({ comment }: { comment: ComComment }) => {
       if (downvoted) {
         setDownvoted(false);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/comments/${comment._id}/remove-downvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/remove-downvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
       if (!upvoted) {
         setUpvoted(true);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/comments/${comment._id}/upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       } else {
         setUpvoted(false);
         setVoteCount(voteCount - 1);
-        await axios.post(`/api/v1/composts/comments/${comment._id}/remove-upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/remove-upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
@@ -133,26 +133,26 @@ const ComCommentCard = ({ comment }: { comment: ComComment }) => {
       if (upvoted) {
         setUpvoted(false);
         setVoteCount(voteCount - 1);
-        await axios.post(`/api/v1/composts/comments/${comment._id}/remove-upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/remove-upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
       if (!downvoted && voteCount > 0) {
         setDownvoted(true);
         setVoteCount(voteCount - 1);
-        await axios.post(`/api/v1/composts/comments/${comment._id}/downvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/downvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       } else if (downvoted) {
         setDownvoted(false);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/comments/${comment._id}/remove-downvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/remove-downvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
@@ -173,11 +173,11 @@ const ComCommentCard = ({ comment }: { comment: ComComment }) => {
   const handlePostReply = async () => {
     try {
       const response = await axios.post(
-        `/api/v1/composts/comments/${comment._id}/replies`,
+        `${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/replies`,
         { replyBody: replyContent },
         {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -212,12 +212,12 @@ const ComCommentCard = ({ comment }: { comment: ComComment }) => {
 
   const handleConfirmEdit = async () => {
     try {
-      await axios.put(`/api/v1/composts/comments/${comment._id}/edit`, {
+      await axios.put(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/edit`, {
         commentBody: editedCommentBody,
         isEdited: true,
       }, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -237,9 +237,9 @@ const ComCommentCard = ({ comment }: { comment: ComComment }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`/api/v1/composts/comments/${comment._id}/delete`, {
+      await axios.delete(`${import.meta.env.VITE_SERVER_URI}/composts/comments/${comment._id}/delete`, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setIsDeleteDialogOpen(false);
