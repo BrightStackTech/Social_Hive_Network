@@ -38,7 +38,9 @@ const CommunitiesPage = () => {
             Authorization: `Bearer ${user?.token}`,
           },
         });
-        setUnjoinedCommunities(response.data.data);
+        setUnjoinedCommunities(
+          Array.isArray(response.data.data) ? response.data.data : []
+        );
       } catch (error) {
         console.error('Error fetching unjoined communities:', error);
       }
@@ -65,16 +67,14 @@ const CommunitiesPage = () => {
     
     const fetchJoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/unjoined-communities', {
+        const response = await axios.get('/api/v1/communities/joined-communities', {
           headers: {
             Authorization: `Bearer ${user?.token}`,
           },
         });
-        setUnjoinedCommunities(
-          Array.isArray(response.data.data) ? response.data.data : []
-        );
+        setJoinedCommunities(Array.isArray(response.data.data) ? response.data.data : []);
       } catch (error) {
-        console.error('Error fetching unjoined communities:', error);
+        console.error('Error fetching joined communities:', error);
       }
     };
 
