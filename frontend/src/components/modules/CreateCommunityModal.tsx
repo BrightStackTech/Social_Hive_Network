@@ -26,30 +26,27 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({ onClose }) 
   const navigate = useNavigate();
   const { user } = useAuth();
 
-useEffect(() => {
-  const delayDebounceFn = setTimeout(() => {
+  useEffect(() => {
+    const checkCommunityNameUnique = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/api/v1/communities/check-community-name`, {
+          params: { communityName: name },
+        });
+        setIsUnique(response.data.data);
+      } catch (error) {
+        console.error('Error checking community name uniqueness:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     if (name.length > 0) {
-      const checkCommunityNameUnique = async () => {
-        setLoading(true);
-        try {
-          const response = await axios.get('/api/v1/communities/check-community-name', {
-            params: { communityName: name },
-          });
-          setIsUnique(response.data.data);
-        } catch (error) {
-          console.error('Error checking community name uniqueness:', error);
-        } finally {
-          setLoading(false);
-        }
-      };
       checkCommunityNameUnique();
     } else {
       setIsUnique(true);
     }
-  }, 500);
-
-  return () => clearTimeout(delayDebounceFn);
-}, [name]);
+  }, [name]);
 
   const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
