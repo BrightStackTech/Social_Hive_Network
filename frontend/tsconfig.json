@@ -19,7 +19,8 @@
       "node_modules/@types",
       "node_modules/cloudinary/types",
       "./src/types"
-    ]
+    ],
+    "esModuleInterop": true
   },
   "include": ["src"]
 }

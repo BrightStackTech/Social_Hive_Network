@@ -95,7 +95,7 @@ function Chat() {
   const [currentSearchIndex, setCurrentSearchIndex] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [documentLinks, setDocumentLinks] = useState<string[]>([]);
-  const [isDocumentBoxOpen, setIsDocumentBoxOpen] = useState(false);
+  // const [isDocumentBoxOpen, setIsDocumentBoxOpen] = useState(false);
   const [imageLinks, setImageLinks] = useState<string[]>([]);
   const [videoLinks, setVideoLinks] = useState<string[]>([]);
   const [audioLinks, setAudioLinks] = useState<string[]>([]);
