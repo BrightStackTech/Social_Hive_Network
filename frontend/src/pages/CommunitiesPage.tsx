@@ -38,7 +38,7 @@ const CommunitiesPage = () => {
             Authorization: `Bearer ${user?.token}`,
           },
         });
-        setUnjoinedCommunities(response.data.data);
+        setUnjoinedCommunities(response.data.data || []);
       } catch (error) {
         console.error('Error fetching unjoined communities:', error);
       }
@@ -280,7 +280,7 @@ const CommunitiesPage = () => {
       <div className="hidden lg:block w-1/3 h-screen overflow-auto border-l-[1px]">
         <div className="text-xl font-semibold m-5 ml-2">Top Communities</div>
         <div className="relative flex border-y-[] flex-col overflow-auto" style={{ height: `${100 - resizableHeight}%` }}>
-          {unjoinedCommunities.map((community) => (
+          {unjoinedCommunities?.map((community) => (
             <div key={community._id} className="accountCard flex items-center justify-between gap-1 p-3 h-14 w-[95%] mx-auto border-y-[1px]">
               <div className="flex items-center gap-1">
                 <div className="min-w-fit">
