@@ -34,10 +34,9 @@ const CommunitiesPage = () => {
     const fetchUnjoinedCommunities = async () => {
       try {
         const response = await axios.get('/api/v1/communities/unjoined-communities', {
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-          },
+          headers: { Authorization: `Bearer ${user?.token}` },
         });
+        console.log("Unjoined communities response:", response.data);
         setUnjoinedCommunities(
           Array.isArray(response.data.data) ? response.data.data : []
         );
@@ -65,18 +64,19 @@ const CommunitiesPage = () => {
       }
     };
     
-    const fetchJoinedCommunities = async () => {
-      try {
-        const response = await axios.get('/api/v1/communities/joined-communities', {
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-          },
-        });
-        setJoinedCommunities(Array.isArray(response.data.data) ? response.data.data : []);
-      } catch (error) {
-        console.error('Error fetching joined communities:', error);
-      }
-    };
+  const fetchJoinedCommunities = async () => {
+    try {
+      const response = await axios.get('/api/v1/communities/joined-communities', {
+        headers: { Authorization: `Bearer ${user?.token}` },
+      });
+      console.log("Joined communities response:", response.data);
+      setJoinedCommunities(
+        Array.isArray(response.data.data) ? response.data.data : []
+      );
+    } catch (error) {
+      console.error('Error fetching joined communities:', error);
+    }
+  };
 
     fetchUnjoinedCommunities();
     fetchJoinedCommunities();
