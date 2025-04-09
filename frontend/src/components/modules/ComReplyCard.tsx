@@ -29,7 +29,7 @@ export interface ComReply {
 }
 
 const ComReplyCard = ({ reply }: { reply: ComReply }) => {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const userId = user?._id ?? '';
   const [upvoted, setUpvoted] = useState(reply.upvotedBy?.includes(userId) || false);
   const [downvoted, setDownvoted] = useState(reply.downvotedBy?.includes(userId) || false);
@@ -53,7 +53,7 @@ const ComReplyCard = ({ reply }: { reply: ComReply }) => {
   useEffect(() => {
     const fetchCommunityAdmin = async () => {
       try {
-        const response = await axios.get(`/api/v1/communities/${reply.comment?.community?.communityName}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/${reply.comment?.community?.communityName}`);
         const community = response.data.data;
         setIsAdmin(community.admin._id === userId);
       } catch (error) {
@@ -71,26 +71,26 @@ const ComReplyCard = ({ reply }: { reply: ComReply }) => {
       if (downvoted) {
         setDownvoted(false);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/replies/${reply._id}/remove-downvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/replies/${reply._id}/remove-downvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
       if (!upvoted) {
         setUpvoted(true);
         setVoteCount(voteCount + 1);
-        await axios.post(`/api/v1/composts/replies/${reply._id}/upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/replies/${reply._id}/upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       } else {
         setUpvoted(false);
         setVoteCount(voteCount - 1);
-        await axios.post(`/api/v1/composts/replies/${reply._id}/remove-upvote`, {}, {
+        await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/replies/${reply._id}/remove-upvote`, {}, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
       }
@@ -105,26 +105,26 @@ const ComReplyCard = ({ reply }: { reply: ComReply }) => {
         if (upvoted) {
           setUpvoted(false);
           setVoteCount(voteCount - 1);
-          await axios.post(`/api/v1/composts/replies/${reply._id}/remove-upvote`, {}, {
+          await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/replies/${reply._id}/remove-upvote`, {}, {
             headers: {
-              Authorization: `Bearer ${user?.token}`,
+              Authorization: `Bearer ${token}`,
             },
           });
         }
         if (!downvoted) {
           setDownvoted(true);
           setVoteCount(voteCount - 1);
-          await axios.post(`/api/v1/composts/replies/${reply._id}/downvote`, {}, {
+          await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/replies/${reply._id}/downvote`, {}, {
             headers: {
-              Authorization: `Bearer ${user?.token}`,
+              Authorization: `Bearer ${token}`,
             },
           });
         } else {
           setDownvoted(false);
           setVoteCount(voteCount + 1);
-          await axios.post(`/api/v1/composts/replies/${reply._id}/remove-downvote`, {}, {
+          await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/replies/${reply._id}/remove-downvote`, {}, {
             headers: {
-              Authorization: `Bearer ${user?.token}`,
+              Authorization: `Bearer ${token}`,
             },
           });
         }
@@ -155,12 +155,12 @@ const ComReplyCard = ({ reply }: { reply: ComReply }) => {
 
   const handleConfirmEdit = async () => {
     try {
-      await axios.put(`/api/v1/composts/replies/${reply._id}/edit`, {
+      await axios.put(`${import.meta.env.VITE_SERVER_URI}/composts/replies/${reply._id}/edit`, {
         replyBody: editedReplyBody,
         isEdited: true,
       }, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -182,9 +182,9 @@ const ComReplyCard = ({ reply }: { reply: ComReply }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`/api/v1/composts/replies/${reply._id}/delete`, {
+      await axios.delete(`${import.meta.env.VITE_SERVER_URI}/composts/replies/${reply._id}/delete`, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setIsDeleteDialogOpen(false);
