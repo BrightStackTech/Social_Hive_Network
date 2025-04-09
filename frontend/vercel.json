@@ -1,6 +1,15 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/" }], 
-    "analytics": {
-         "enabled": false
-     }
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://social-hive-network.onrender.com/api/v1/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
+  "analytics": {
+    "enabled": false
+  }
 }
