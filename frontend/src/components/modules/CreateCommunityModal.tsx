@@ -30,7 +30,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({ onClose }) 
     const checkCommunityNameUnique = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/api/v1/communities/check-community-name`, {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/check-community-name`, {
           params: { communityName: name },
         });
         setIsUnique(response.data.data);
