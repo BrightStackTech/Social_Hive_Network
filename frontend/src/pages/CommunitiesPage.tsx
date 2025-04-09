@@ -51,7 +51,11 @@ const CommunitiesPage = () => {
             Authorization: `Bearer ${user?.token}`,
           },
         });
-        setCommunitiesFeed(response.data);
+        // Ensure communitiesFeed is an array
+        const feed = Array.isArray(response.data)
+          ? response.data
+          : response.data.posts || [];
+        setCommunitiesFeed(feed);
       } catch (error) {
         console.error('Error fetching communities feed:', error);
       } finally {
