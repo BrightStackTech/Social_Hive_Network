@@ -16,7 +16,7 @@ function CreateUpdatesModal() {
   const [selectedMedia, setSelectedMedia] = useState<File | null>(null);
   const [mediaUrl, setMediaUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const navigate = useNavigate();
   const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false);
   const [isMediaSelected, setIsMediaSelected] = useState(false);
@@ -75,9 +75,9 @@ function CreateUpdatesModal() {
         postedBy: user?._id, // Ensure this is the user's ID
       };
 
-      await axios.post(`/api/v1/updates`, payload, {
+      await axios.post(`${import.meta.env.VITE_SERVER_URI}/updates`, payload, {
         headers: {
-          Authorization: `Bearer ${user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
