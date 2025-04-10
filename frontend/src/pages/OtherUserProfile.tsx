@@ -39,7 +39,7 @@ function OtherUserProfile() {
     const [loading, setLoading] = useState(true)
     const [showPreview, setShowPreview] = useState(false);
     const [posts,setPosts] = useState<any>([])
-    const {user} = useAuth()
+    const {user, token} = useAuth()
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
     const [followLoading,setFollowLoading] = useState(false)
@@ -205,7 +205,7 @@ if (!text) {
     const response = await axios.get(
       `${import.meta.env.VITE_SERVER_URI}/composts/user/${otherUser._id}/community-posts`,
       {
-        headers: { Authorization: `Bearer ${user.token}` },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
     setCommunityPosts(response.data);
