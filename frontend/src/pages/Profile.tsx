@@ -165,7 +165,7 @@ const Profile = () => {
       }
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_URI}/composts/user/${user._id}/community-posts`,
-        { headers: { Authorization: `Bearer ${user.token}` } }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setCommunityPosts(response.data);
     } catch (error) {
