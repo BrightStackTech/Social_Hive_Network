@@ -42,7 +42,7 @@ import { CategoryCard } from '@/components/modules/CategoryCard';
 
 const Profile = () => {
   const navigate = useNavigate()
-  const { user,setUser } = useAuth();
+  const { user, token, setUser } = useAuth();
   const pathname = window.location.pathname;
   const [showPreview, setShowPreview] = useState(false);
   const [posts, setPosts] = useState([])
@@ -76,7 +76,7 @@ const Profile = () => {
   const fetchCategories = async () => {
     setCategoriesLoading(true);
     try {
-      const response = await axios.get('/api/v1/categories?createdBy=' + user?._id);
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/categories?createdBy=` + user?._id);
       setCategories(response.data.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -95,7 +95,7 @@ const Profile = () => {
     setCatPostsLoading(true);
     try {
       const response = await axios.get(
-        `/api/v1/posts/search?query=${encodeURIComponent(categoryName)}`
+        `${import.meta.env.VITE_SERVER_URI}/posts/search?query=${encodeURIComponent(categoryName)}`
       );
       const filtered = response.data.data.posts.filter((post: PostInterface) => {
         const title = post.title.toLowerCase();
@@ -164,7 +164,7 @@ const Profile = () => {
         return;
       }
       const response = await axios.get(
-        `/api/v1/composts/user/${user._id}/community-posts`,
+        `${import.meta.env.VITE_SERVER_URI}/composts/user/${user._id}/community-posts`,
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
       setCommunityPosts(response.data);
@@ -237,7 +237,7 @@ function convertEmailToLink(text: string): string {
     const fetchUpdates = async () => {
       try {
         if (user) {
-          const response = await axios.get(`/api/v1/updates/${user._id}`);
+          const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/updates/${user._id}`);
           setHasUpdates(response.data.length > 0);
         }
       } catch (error) {
@@ -249,7 +249,7 @@ function convertEmailToLink(text: string): string {
     }, [user?._id]);
   
     const fetchSavedPosts = async () => {
-      const response = await axios.get('/api/v1/posts/saved-posts');
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/posts/saved-posts`);
       setSavedPosts(response.data.data);
       setSavedPostsLoading(false);
     };
@@ -257,9 +257,9 @@ function convertEmailToLink(text: string): string {
     const fetchLikedPosts = async () => {
       setLikedPostsLoading(true);
       try {
-        const response = await axios.get('/api/v1/posts/liked-posts', {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/posts/liked-posts`, {
           headers: {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         setLikedPosts(response.data.data);
