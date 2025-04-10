@@ -741,7 +741,7 @@ const decodeUrlFromRandomNumbers = (encodedUrl: string): string => {
     const cloudinaryPattern = new RegExp(`https://res.cloudinary.com/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload/[-A-Z0-9+&@#\/%?=~_|!:,.;]*`, 'gi');
     const cloudinaryVideoPattern = new RegExp(`https://res.cloudinary.com/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/video/upload/[-A-Z0-9+&@#\/%?=~_|!:,.;]*\\.(mp4|mov|ogg)`, 'gi');
     const cloudinaryAudioPattern = new RegExp(`https://res.cloudinary.com/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/video/upload/[-A-Z0-9+&@#\/%?=~_|!:,.;]*\.webm`, 'gi');
-    const s3Pattern = new RegExp(`https://${import.meta.env.VITE_AWS_BUCKET_NAME}.s3.${import.meta.env.VITE_AWS_REGION}}.amazonaws.com/[-A-Z0-9+&@#\/%?=~_|!:,.;]*`, 'gi');
+    const s3Pattern = new RegExp(`https://${import.meta.env.VITE_AWS_BUCKET_NAME}.s3.${import.meta.env.VITE_AWS_REGION}.amazonaws.com/[-A-Z0-9+&@#\/%?=~_|!:,.;]*`, 'gi');
     const emailPattern = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
     const mentionPattern = /(^|\s)(@[a-zA-Z0-9._-]+)/g;
     
