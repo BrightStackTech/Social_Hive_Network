@@ -49,7 +49,7 @@ function ExplorePosts() {
 
       const usersWithUpdates = await Promise.all(
         followings.map(async (following: { _id: any; }) => {
-          const updatesResponse = await axios.get(`/api/v1/updates/${following._id}`);
+          const updatesResponse = await axios.get(`${import.meta.env.VITE_SERVER_URI}/updates/${following._id}`);
           const updates = updatesResponse.data;
 
           const hasViewed = updates.every((update: { viewedBy: string | string[]; }) => update.viewedBy.includes(user._id));
