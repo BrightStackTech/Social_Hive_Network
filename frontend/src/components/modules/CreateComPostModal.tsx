@@ -23,7 +23,7 @@ const CreateComPostModal: React.FC<CreateComPostModalProps> = ({ onClose }) => {
   const [communities, setCommunities] = useState<any[]>([]);
   const [selectedCommunity, setSelectedCommunity] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const navigate = useNavigate();
   const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
@@ -91,8 +91,8 @@ const CreateComPostModal: React.FC<CreateComPostModalProps> = ({ onClose }) => {
   useEffect(() => {
     const fetchJoinedCommunities = async () => {
       try {
-        const response = await axios.get('/api/v1/communities/joined-communities', {
-          headers: { Authorization: `Bearer ${user?.token}` },
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/joined-communities`, {
+          headers: { Authorization: `Bearer ${token}` },
         });
         setCommunities(response.data.data);
       } catch (error) {
@@ -100,7 +100,7 @@ const CreateComPostModal: React.FC<CreateComPostModalProps> = ({ onClose }) => {
       }
     };
     fetchJoinedCommunities();
-  }, [user?.token]);
+  }, [token]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -246,8 +246,8 @@ const handleCropImages = async () => {
     console.log('Request payload:', payload);
 
     try {
-      const response = await axios.post('/api/v1/composts/create-compost', payload, {
-        headers: { Authorization: `Bearer ${user?.token}` },
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URI}/composts/create-compost`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
       });
       console.log('Compost created:', response.data);
       setTitle('');
