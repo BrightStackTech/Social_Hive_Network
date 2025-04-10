@@ -249,7 +249,11 @@ function convertEmailToLink(text: string): string {
     }, [user?._id]);
   
     const fetchSavedPosts = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/posts/saved-posts`);
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/posts/saved-posts`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setSavedPosts(response.data.data);
       setSavedPostsLoading(false);
     };
