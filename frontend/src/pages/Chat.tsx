@@ -1733,11 +1733,11 @@ useEffect(() => {
                   <div className='min-w-fit text-xs text-muted-foreground ml-2'>
                     <span className={` ${message.length >= MESSAGE_LENGTH_LIMIT - 10 ? 'text-red-500' : 'text-green-500'}`}>{message.length}</span>/{MESSAGE_LENGTH_LIMIT}
                   </div>
-                  <Button variant="ghost" onClick={isRecording ? handleStopRecording : handleStartRecording}>
+                  <Button variant="ghost" onClick={isRecording ? handleStopRecording : handleStartRecording} className='w-10 p-0'>
                       {isRecording ? <FaStop style={{ width: '25px', height: '25px' }} /> : <FaMicrophone style={{ width: '25px', height: '25px' }} />}
                   </Button>
                   <div className="relative">
-                    <Button onClick={toggleOptions} variant="ghost" className="relative">
+                    <Button onClick={toggleOptions} variant="ghost" className="relative w-10 p-0">
                       <FaPaperclip style={{ width: '20px', height: '20px' }} />
                     </Button>
                     {isOpen && (
