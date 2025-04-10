@@ -46,7 +46,7 @@ const PostCard = ({otherUser, post, followCallback }:{otherUser:UserInterface|un
   useEffect(() => {
     if (otherUser?._id && token) {
       axios
-        .get(`/api/v1/categories?createdBy=${otherUser._id}`, {
+        .get(`${import.meta.env.VITE_SERVER_URI}/categories?createdBy=${otherUser._id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
