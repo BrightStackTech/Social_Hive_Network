@@ -446,92 +446,85 @@ function convertEmailToLink(text: string): string {
               </div>
             </div>
             <div className="w-full h-[2px] bg-muted mt-5"></div>
-        <div className={`profile-tabs bg-gray-200 sticky top-0 duration-300 z-[9999] dark:bg-gray-700 text-gray-800 dark:text-gray-200 my-3 overflow-x-auto whitespace-nowrap`}>
-        <ul className="flex justify-center md:gap-1">
-          <li className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
-            selectedTab === "Posts" && "bg-muted  font-bold hover:text-gray-500"
-          }`}
-          onClick={() =>{
-            if(selectedTab != "Posts") 
-            setSelectedTab("Posts")
-            else{
-              scrollToTop()
-            }
-          }
-          }
-          >Posts</li>
-          <li
-            className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
-              selectedTab === "Community Posts" && "bg-muted font-bold hover:text-gray-500"
-            }`}
-            onClick={() => {
-              if (selectedTab !== "Community Posts") {
-                setSelectedTab("Community Posts");
-                getUserCommunityPosts();
-              } else {
-                scrollToTop();
-              }
-            }}
-          >
-            Community Posts
-          </li>
-          <li
-            className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
-              selectedTab === "Categories" && "bg-muted font-bold hover:text-gray-500"
-            }`}
-            onClick={() => {
-              if (selectedTab !== "Categories") {
-                setSelectedTab("Categories");
-              } else {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
-            }}
-          >
-            Categories
-          </li>
-          <li className={`cursor-pointer hover:text-blue-500 duration-150 p-3  md:px-2 m-2
-            ${selectedTab === "Projects" && "bg-muted hover:text-gray-500 font-bold"}
-          `}
-          onClick={()=>{
-            if(selectedTab != "Projects") 
-              setSelectedTab("Projects")
-              else{
-                scrollToTop()
-              }
-          }}
-          >Projects</li>
-          <li
-            className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
-              selectedTab === "Saved Posts" && "bg-muted font-bold hover:text-gray-500"
-            }`}
-            onClick={() => {
-              if (selectedTab !== "Saved Posts") {
-                setSelectedTab("Saved Posts");
-                fetchSavedPosts();
-              } else {
-                scrollToTop();
-              }
-            }}
-          >
-            Saved Posts
-          </li>
-          <li
-            className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${
-              selectedTab === "Liked Posts" && "bg-muted font-bold hover:text-gray-500"
-            }`}
-            onClick={() => {
-              if (selectedTab !== "Liked Posts") {
-                setSelectedTab("Liked Posts");
-                fetchLikedPosts();
-              } else {
-                scrollToTop();
-              }
-            }}
-          >
-            Liked Posts
-          </li>          
-        </ul>
-      </div>
+            <div className={`profile-tabs bg-gray-200 sticky top-0 duration-300 z-[9999] dark:bg-gray-700 text-gray-800 dark:text-gray-200 my-3 overflow-x-auto whitespace-nowrap`}>
+              <ul className="flex gap-1">
+                <li
+                  className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${selectedTab === "Posts" && "bg-muted font-bold hover:text-gray-500"}`}
+                  onClick={() => {
+                    if(selectedTab != "Posts") 
+                      setSelectedTab("Posts")
+                    else {
+                      scrollToTop()
+                    }
+                  }}
+                >
+                  Posts
+                </li>
+                <li
+                  className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${selectedTab === "Community Posts" && "bg-muted font-bold hover:text-gray-500"}`}
+                  onClick={() => {
+                    if (selectedTab !== "Community Posts") {
+                      setSelectedTab("Community Posts");
+                      getUserCommunityPosts();
+                    } else {
+                      scrollToTop();
+                    }
+                  }}
+                >
+                  Community Posts
+                </li>
+                <li
+                  className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${selectedTab === "Categories" && "bg-muted font-bold hover:text-gray-500"}`}
+                  onClick={() => {
+                    if (selectedTab !== "Categories") {
+                      setSelectedTab("Categories");
+                    } else {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
+                >
+                  Categories
+                </li>
+                <li
+                  className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${selectedTab === "Projects" && "bg-muted hover:text-gray-500 font-bold"}`}
+                  onClick={() => {
+                    if(selectedTab !== "Projects")
+                      setSelectedTab("Projects")
+                    else {
+                      scrollToTop();
+                    }
+                  }}
+                >
+                  Projects
+                </li>
+                <li
+                  className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${selectedTab === "Saved Posts" && "bg-muted font-bold hover:text-gray-500"}`}
+                  onClick={() => {
+                    if (selectedTab !== "Saved Posts") {
+                      setSelectedTab("Saved Posts");
+                      fetchSavedPosts();
+                    } else {
+                      scrollToTop();
+                    }
+                  }}
+                >
+                  Saved Posts
+                </li>
+                <li
+                  className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${selectedTab === "Liked Posts" && "bg-muted font-bold hover:text-gray-500"}`}
+                  onClick={() => {
+                    if (selectedTab !== "Liked Posts") {
+                      setSelectedTab("Liked Posts");
+                      fetchLikedPosts();
+                    } else {
+                      scrollToTop();
+                    }
+                  }}
+                >
+                  Liked Posts
+                </li>
+              </ul>
+            </div>
       {selectedTab == "Posts" && <div className="posts">
         {
           posts.length == 0 &&
