@@ -3,7 +3,7 @@ import ProfileSideBar from '@/components/sections/ProfileSideBar';
 import FloatingActionButton from '@/components/modules/FloatingActionButton';
 import OthersPostCard from '@/components/modules/Posts/OthersPostCard';
 import { useAuth } from '@/context/AuthContext';
-import { getUserFeed, getAccountsToFollow } from '@/api/index';
+import { getUserFeed, getAccountsToFollow, getFollowing } from '@/api/index';
 import PostSkeletonLoader from '@/components/modules/Posts/PostSkeletonLoader';
 import { usePullToRefresh } from '@/components/modules/usePullRefreshHook';
 import { Link } from 'react-router-dom';
@@ -44,20 +44,22 @@ function ExplorePosts() {
   const fetchFollowedUsersWithUpdates = async () => {
     try {
       if (!user) return;
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/users/following/${user.username}`);
-      const followings = response.data.data; // Ensure the correct data path
+      // Use getFollowing from your API module
+      const response = await getFollowing({ username: user.username });
+      const followings = response.data.data; // Ensure this path matches your backend response
 
       const usersWithUpdates = await Promise.all(
-        followings.map(async (following: { _id: any; }) => {
+        followings.map(async (following: { _id: string }) => {
+          // You can still use axios to get the updates
           const updatesResponse = await axios.get(`${import.meta.env.VITE_SERVER_URI}/updates/${following._id}`);
           const updates = updatesResponse.data;
-
-          const hasViewed = updates.every((update: { viewedBy: string | string[]; }) => update.viewedBy.includes(user._id));
+          const hasViewed = updates.every((update: { viewedBy: string | string[] }) =>
+            update.viewedBy.includes(user._id)
+          );
           return { ...following, hasUpdates: updates.length > 0, hasViewed };
         })
       );
-
-      setFollowedUsersWithUpdates(usersWithUpdates.filter(user => user.hasUpdates));
+      setFollowedUsersWithUpdates(usersWithUpdates.filter((user) => user.hasUpdates));
     } catch (error) {
       console.error('Error fetching followed users with updates:', error);
     }
