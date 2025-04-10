@@ -521,7 +521,7 @@ if (!text) {
             )}
 
             {selectedTab === "Community Posts" && (
-              <div className="community-posts">
+              <div className="community-posts min-h-[70vh]">
                 {communityPostsLoading && (
                   <div className="flex justify-center items-center h-full">
                     <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
@@ -543,7 +543,7 @@ if (!text) {
               <>
                 {selectedCategory ? (
                   // Render category posts view (back button and posts list)
-                  <div className="flex flex-col gap-2 mb-8">
+                  <div className="flex flex-col gap-2 mb-8 min-h-[70vh]">
                     <div className="flex items-center px-6 mt-6">
                       <button
                         className="px-4 py-2 border rounded"
@@ -575,7 +575,7 @@ if (!text) {
                   </div>
                 ) : (
                   // Render list of category cards
-                  <div className="p-4 flex flex-col gap-4 mb-8">
+                  <div className="p-4 flex flex-col gap-4 mb-8 min-h-[70vh]">
                     {categoriesLoading ? (
                       <p className="text-center">Loading categories...</p>
                     ) : categories.length === 0 ? (
