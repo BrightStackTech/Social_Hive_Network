@@ -249,7 +249,7 @@ function convertUrlsToLinks(text: string): string {
 
   useEffect(() => {
     if (user?.username && token) {
-      fetch(`/api/v1/users/followers/${user.username}`, {
+      fetch(`${import.meta.env.VITE_SERVER_URI}/users/followers/${user.username}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
