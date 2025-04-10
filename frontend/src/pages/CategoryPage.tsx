@@ -69,7 +69,7 @@ function CategoryPage() {
   useEffect(() => {
     if (categoryId) {
       axios
-        .get(`/api/v1/categories/${categoryId}`)
+        .get(`${import.meta.env.VITE_SERVER_URI}/categories/${categoryId}`)
         .then((res) => {
           setCategory(res.data.data);
         })
@@ -84,7 +84,7 @@ function CategoryPage() {
     setCatPostsLoading(true);
     try {
       const response = await axios.get(
-        `/api/v1/posts/search?query=${encodeURIComponent(categoryName)}`
+        `${import.meta.env.VITE_SERVER_URI}/posts/search?query=${encodeURIComponent(categoryName)}`
       );
       // Filter posts based on two conditions:
       // 1. The post title should include the category name (or "@" + categoryName)
@@ -114,7 +114,7 @@ function CategoryPage() {
   // Fetch followers and groups for "Share in Chat"
     useEffect(() => {
     if (user?.username && token) {
-        fetch(`/api/v1/users/followers/${user.username}`, {
+        fetch(`${import.meta.env.VITE_SERVER_URI}/users/followers/${user.username}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,
