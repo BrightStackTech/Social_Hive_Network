@@ -580,7 +580,7 @@ function convertEmailToLink(text: string): string {
       </div>
       )}
       {selectedTab === "Saved Posts" && (
-        <div className="saved-posts">
+        <div className="saved-posts min-h-[70vh]">
           {savedPostsLoading && (
             <div className="flex justify-center items-center h-full">
               <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
@@ -603,7 +603,7 @@ function convertEmailToLink(text: string): string {
         </div>
       )}
       {selectedTab === "Liked Posts" && (
-        <div className="liked-posts">
+        <div className="liked-posts min-h-[70vh]">
           {likedPostsLoading && (
             <div className="flex justify-center items-center h-full">
               <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
@@ -631,7 +631,7 @@ function convertEmailToLink(text: string): string {
           <>
             {selectedCategory ? (
               // Render the category posts view with back button and category name
-              <div className="flex flex-col gap-2 mb-8">
+              <div className="flex flex-col gap-2 mb-8 min-h-[70vh]">
                 <div className="flex items-center px-6 mt-6">
                   <Button
                     variant="outline"
@@ -665,7 +665,7 @@ function convertEmailToLink(text: string): string {
               </div>
             ) : (
               // Render default view: the list of category cards
-              <div className="p-4 flex flex-col gap-4 mb-8">
+              <div className="p-4 flex flex-col gap-4 mb-8 min-h-[70vh]">
                 {categoriesLoading ? (
                   <p className="text-center">Loading categories...</p>
                 ) : categories.length === 0 ? (
