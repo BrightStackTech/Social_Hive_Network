@@ -5,7 +5,7 @@ import OthersPostCard from '@/components/modules/Posts/OthersPostCard';
 import { useAuth } from '@/context/AuthContext';
 import { getUserFeed, getAccountsToFollow, getFollowing } from '@/api/index';
 import PostSkeletonLoader from '@/components/modules/Posts/PostSkeletonLoader';
-import { usePullToRefresh } from '@/components/modules/usePullRefreshHook';
+// import { usePullToRefresh } from '@/components/modules/usePullRefreshHook';
 import { Link } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
 import { formatDistanceToNow } from 'date-fns';
@@ -83,7 +83,7 @@ function ExplorePosts() {
     setLoading(false);
   };
 
-  usePullToRefresh(contentDivRef, fetchPosts);
+  // usePullToRefresh(contentDivRef, fetchPosts);
 
   const handleLoadMore = () => {
     if (hasMore && !loading) {
