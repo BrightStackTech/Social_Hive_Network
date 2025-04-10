@@ -44,7 +44,7 @@ function ExplorePosts() {
   const fetchFollowedUsersWithUpdates = async () => {
     try {
       if (!user) return;
-      const response = await axios.get(`/api/v1/users/following/${user.username}`);
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/users/following/${user.username}`);
       const followings = response.data.data; // Ensure the correct data path
 
       const usersWithUpdates = await Promise.all(
