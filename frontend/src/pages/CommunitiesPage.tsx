@@ -100,7 +100,7 @@ const CommunitiesPage = () => {
     if (pulling) {
       setRefreshing(true);
       setPulling(false);
-      window.location.reload();
+      //window.location.reload();
     }
   };
 
