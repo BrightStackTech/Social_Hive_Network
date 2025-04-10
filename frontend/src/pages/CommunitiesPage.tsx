@@ -10,6 +10,8 @@ import ComPostCard from '@/components/modules/ComPostCard';
 import ComPostSkeletonLoader from '@/components/modules/ComPostSkeletonLoader'; // Import ComPostSkeletonLoader
 import LoadingWheel from '@/components/ui/LoadingWheel'; // Import LoadingWheel
 import Loader from '@/components/Loader';
+import { Dialog, DialogClose, DialogContent, DialogTitle} from '@/components/ui/dialog';// Adjust the import path based on your project structure
+import { Button } from "@/components/ui/button";
 
 const CommunitiesPage = () => {
   const { user, token } = useAuth();
@@ -27,6 +29,8 @@ const CommunitiesPage = () => {
   const [joinedCommunities, setJoinedCommunities] = useState<any[]>([]);
   const [searchQuery1, setSearchQuery1] = useState('');
   const [resizableHeight, setResizableHeight] = useState(50);
+  const [showProfileDialog, setShowProfileDialog] = useState(false);
+  const [showEditProfileDialog, setShowEditProfileDialog] = useState(false);
 
   useEffect(() => {
     document.title = "SocialHive- Communities";
@@ -190,7 +194,7 @@ const CommunitiesPage = () => {
 
   return (
     <div className="flex w-full" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-      <div className="flex flex-col items-center w-full lg:w-2/3">
+      <div className="flex flex-col items-center w-full lg:w-2/3 h-screen">
         <MobileUserNavbar scrollableDiv={null} />
         {user && (
           <nav className="flex justify-between items-center p-4 bg-muted w-full border-0 border-b-2 border-muted-foreground">
@@ -276,6 +280,107 @@ const CommunitiesPage = () => {
             );
           })}
         </div>
+        <div className="lg:hidden absolute bottom-0 inset-x-0 bg-gray-200 dark:bg-gray-900 p-4 border-t border-gray-300">
+          <ul className="flex divide-x divide-gray-400">
+            <li 
+              className="flex-1 cursor-pointer text-center text-sm font-medium"
+              onClick={() => setShowProfileDialog(true)}>
+              Top Communities
+            </li>
+            <li 
+              className="flex-1 cursor-pointer text-center text-sm font-medium"
+              onClick={() => setShowEditProfileDialog(true)}>
+              Joined Communities
+            </li>
+          </ul>
+        </div>
+        {/* Dialog for Top Communities */}
+        <Dialog open={showProfileDialog} onOpenChange={setShowProfileDialog}>
+          <DialogContent>
+            <DialogTitle className="text-center font-bold mb-4">Top Communities</DialogTitle>
+            <div className="h-80 overflow-y-auto space-y-2">
+              {unjoinedCommunities.map((community) => (
+                <div
+                  key={community._id}
+                  className="accountCard flex items-center justify-between gap-2 p-3 w-[95%] mx-auto border-y-[1px]"
+                >
+                  <div className="flex items-center gap-2 flex-1">
+                    <img
+                      src={community.profilePicture}
+                      alt={community.communityName}
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <div className="flex-1">
+                      <Link
+                        to={`/communities/c/${community.communityName}`}
+                        className="font-semibold truncate hover:underline"
+                      >
+                        {community.communityName}
+                      </Link>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {community.description}
+                      </p>
+                    </div>
+                  </div>
+                  <JoinLeaveButton
+                    communityName={community.communityName}
+                    isJoined={false}
+                    isRemoved={community.removedMem.includes(user?._id)}
+                    isPending={community.pendingReq.includes(user?._id)}
+                    onJoinLeave={() => handleJoinLeave(community.communityName)}
+                  />
+                </div>
+              ))}
+            </div>
+            <DialogClose asChild>
+              <Button className="w-full mt-4">Close</Button>
+            </DialogClose>
+          </DialogContent>
+        </Dialog>
+
+        {/* Dialog for Joined Communities */}
+        <Dialog open={showEditProfileDialog} onOpenChange={setShowEditProfileDialog}>
+          <DialogContent>
+            <DialogTitle className="text-center font-bold mb-4">Joined Communities</DialogTitle>
+            <div className="h-80 overflow-y-auto space-y-2">
+              {joinedCommunities.map((community) => (
+                <div
+                  key={community._id}
+                  className="accountCard flex items-center justify-between gap-2 p-3 w-[95%] mx-auto border-y-[1px]"
+                >
+                  <div className="flex items-center gap-2 flex-1">
+                    <img
+                      src={community.profilePicture}
+                      alt={community.communityName}
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <div className="flex-1">
+                      <Link
+                        to={`/communities/c/${community.communityName}`}
+                        className="font-semibold truncate hover:underline"
+                      >
+                        {community.communityName}
+                      </Link>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {community.description}
+                      </p>
+                    </div>
+                  </div>
+                  <JoinLeaveButton
+                    communityName={community.communityName}
+                    isJoined={true}
+                    isRemoved={community.removedMem.includes(user?._id)}
+                    isPending={community.pendingReq.includes(user?._id)}
+                    onJoinLeave={() => handleJoinLeave(community.communityName)}
+                  />
+                </div>
+              ))}
+            </div>
+            <DialogClose asChild>
+              <Button className="w-full mt-4">Close</Button>
+            </DialogClose>
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="hidden lg:block w-1/3 h-screen overflow-auto border-l-[1px]">
         <div className="text-xl font-semibold m-5 ml-2">Top Communities</div>
