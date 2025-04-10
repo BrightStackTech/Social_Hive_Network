@@ -1,6 +1,6 @@
 // import { useAuth } from '@/context/AuthContext';
 import { MeetingProvider } from "@videosdk.live/react-sdk";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { MeetingAppProvider } from "@/MeetingAppContextDef";
 import { MeetingContainer } from "@/meeting/MeetingContainer.jsx";
 import { LeaveScreen } from "@/components/screens/LeaveScreen.jsx";
@@ -22,7 +22,7 @@ function LiveSessions() {
   const [customVideoStream, setCustomVideoStream] = useState<MediaStream | undefined>(undefined);
   const [isMeetingStarted, setMeetingStarted] = useState(false);
   const [isMeetingLeft, setIsMeetingLeft] = useState(false);
-  // const contentDivRef = useRef<HTMLDivElement>(null);
+  const contentDivRef = useRef<HTMLDivElement>(null);
 
   const isMobile = window.matchMedia("only screen and (max-width: 768px)").matches;
 
@@ -40,7 +40,9 @@ function LiveSessions() {
     <div className="relative">
       <div className="flex h-screen">
         <div className="flex-1 flex flex-col">
-          <MobileUserNavbar scrollableDiv={null} />
+          <div ref={contentDivRef}>
+            {isMobile && <MobileUserNavbar scrollableDiv={ contentDivRef } />}
+          </div>
           <MeetingAppProvider>
             {isMeetingStarted ? (
               <MeetingProvider
