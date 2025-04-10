@@ -414,8 +414,8 @@ export function JoiningScreen({
           <div className="container grid  md:grid-flow-col grid-flow-row ">
             <div className="grid grid-cols-12">
               <div className="md:col-span-7 2xl:col-span-7 col-span-12">
-                <div className="flex items-center justify-center p-1.5 sm:p-4 lg:p-6">
-                  <div className="relative w-full md:pl-4 sm:pl-10 pl-5  md:pr-4 sm:pr-10 pr-5">
+                <div className="flex items-center justify-center">
+                  <div className="relative w-full">
                     <div className="w-full relative" style={{ height: "55vh" }}>
                       <video
                         autoPlay
