@@ -12,6 +12,7 @@ import ComPostSkeletonLoader from '@/components/modules/ComPostSkeletonLoader'; 
 import Loader from '@/components/Loader';
 import { Dialog, DialogClose, DialogContent, DialogTitle} from '@/components/ui/dialog';// Adjust the import path based on your project structure
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const CommunitiesPage = () => {
   const { user, token } = useAuth();
@@ -31,6 +32,9 @@ const CommunitiesPage = () => {
   const [resizableHeight, setResizableHeight] = useState(50);
   const [showProfileDialog, setShowProfileDialog] = useState(false);
   const [showEditProfileDialog, setShowEditProfileDialog] = useState(false);
+  const [topDialogSearchQuery, setTopDialogSearchQuery] = useState("");
+  const [joinedDialogSearchQuery, setJoinedDialogSearchQuery] = useState("");
+  const [searchQueryTop, setSearchQueryTop] = useState('');
 
   useEffect(() => {
     document.title = "SocialHive- Communities";
@@ -173,6 +177,11 @@ const CommunitiesPage = () => {
     community?.communityName.toLowerCase().includes(searchQuery1.toLowerCase())
   );
 
+  const filteredTopCommunities = unjoinedCommunities.filter((community) =>
+    community.communityName.toLowerCase().includes(searchQueryTop.toLowerCase()) ||
+    (community.description && community.description.toLowerCase().includes(searchQueryTop.toLowerCase()))
+  );
+
   const handleMouseDown = (e: React.MouseEvent) => {
     const startY = e.clientY;
     const startHeight = resizableHeight;
@@ -288,7 +297,7 @@ const CommunitiesPage = () => {
             <li 
               className="flex-1 cursor-pointer text-center text-sm font-medium"
               onClick={() => setShowProfileDialog(true)}>
-              Top Communities
+              Browse Communities
             </li>
             <li 
               className="flex-1 cursor-pointer text-center text-sm font-medium"
@@ -299,96 +308,127 @@ const CommunitiesPage = () => {
         </div>
         {/* Dialog for Top Communities */}
         <Dialog open={showProfileDialog} onOpenChange={setShowProfileDialog}>
-          <DialogContent>
-            <DialogTitle className="text-center font-bold mb-4">Top Communities</DialogTitle>
-            <div className="h-80 overflow-y-auto space-y-2">
-              {unjoinedCommunities.map((community) => (
-                <div
-                  key={community._id}
-                  className="accountCard flex items-center justify-between gap-2 p-3 w-[95%] mx-auto border-y-[1px]"
-                >
-                  <div className="flex items-center gap-2 flex-1">
-                    <img
-                      src={community.profilePicture}
-                      alt={community.communityName}
-                      className="w-10 h-10 rounded-full"
-                    />
-                    <div className="flex-1">
-                      <Link
-                        to={`/communities/c/${community.communityName}`}
-                        className="font-semibold truncate hover:underline"
-                      >
-                        {community.communityName}
-                      </Link>
-                      <p className="text-xs text-muted-foreground">
-                        {truncate(community.description, 20)}
-                      </p>
-                    </div>
-                  </div>
-                  <JoinLeaveButton
-                    communityName={community.communityName}
-                    isJoined={false}
-                    isRemoved={community.removedMem.includes(user?._id)}
-                    isPending={community.pendingReq.includes(user?._id)}
-                    onJoinLeave={() => handleJoinLeave(community.communityName)}
-                  />
+            <DialogContent>
+                <DialogTitle className="text-center font-bold mb-4">Browse Communities</DialogTitle>
+                <input 
+                    type="text"
+                    placeholder="Search Top Communities..."
+                    value={topDialogSearchQuery}
+                    onChange={(e) => setTopDialogSearchQuery(e.target.value)}
+                    className="w-[95%] mx-auto p-2 border border-muted rounded mb-4 mt-4 bg-transparent"
+                />
+                <div className="h-80 overflow-y-auto space-y-2">
+                    {unjoinedCommunities
+                      .filter(community => 
+                        community.communityName.toLowerCase().includes(topDialogSearchQuery.toLowerCase()) ||
+                        (community.description && community.description.toLowerCase().includes(topDialogSearchQuery.toLowerCase()))
+                      )
+                      .map((community) => (
+                        <div
+                          key={community._id}
+                          className="accountCard flex items-center justify-between gap-2 p-3 w-[95%] mx-auto border-y-[1px]"
+                        >
+                          <div className="flex items-center gap-2 flex-1">
+                            <img
+                              src={community.profilePicture}
+                              alt={community.communityName}
+                              className="w-10 h-10 rounded-full"
+                            />
+                            <div className="flex-1">
+                              <Link
+                                to={`/communities/c/${community.communityName}`}
+                                className="font-semibold truncate hover:underline"
+                              >
+                                {community.communityName}
+                              </Link>
+                              <p className="text-xs text-muted-foreground">
+                                {truncate(community.description, 20)}
+                              </p>
+                            </div>
+                          </div>
+                          <JoinLeaveButton
+                            communityName={community.communityName}
+                            isJoined={false}
+                            isRemoved={community.removedMem.includes(user?._id)}
+                            isPending={community.pendingReq.includes(user?._id)}
+                            onJoinLeave={() => handleJoinLeave(community.communityName)}
+                          />
+                        </div>
+                    ))}
                 </div>
-              ))}
-            </div>
-            <DialogClose asChild>
-              <Button className="w-full mt-4">Close</Button>
-            </DialogClose>
-          </DialogContent>
+                <DialogClose asChild>
+                    <Button className="w-full mt-4">Close</Button>
+                </DialogClose>
+            </DialogContent>
         </Dialog>
 
         {/* Dialog for Joined Communities */}
         <Dialog open={showEditProfileDialog} onOpenChange={setShowEditProfileDialog}>
-          <DialogContent>
-            <DialogTitle className="text-center font-bold mb-4">Joined Communities</DialogTitle>
-            <div className="h-80 overflow-y-auto space-y-2">
-              {joinedCommunities.map((community) => (
-                <div
-                  key={community._id}
-                  className="accountCard flex items-center justify-between gap-2 p-3 w-[95%] mx-auto border-y-[1px]"
-                >
-                  <div className="flex items-center gap-2 flex-1">
-                    <img
-                      src={community.profilePicture}
-                      alt={community.communityName}
-                      className="w-10 h-10 rounded-full"
-                    />
-                    <div className="flex-1">
-                      <Link
-                        to={`/communities/c/${community.communityName}`}
-                        className="font-semibold truncate hover:underline"
-                      >
-                        {community.communityName}
-                      </Link>
-                      <p className="text-xs text-muted-foreground">
-                        {truncate(community.description, 20)}
-                      </p>
-                    </div>
-                  </div>
-                  <JoinLeaveButton
-                    communityName={community.communityName}
-                    isJoined={true}
-                    isRemoved={community.removedMem.includes(user?._id)}
-                    isPending={community.pendingReq.includes(user?._id)}
-                    onJoinLeave={() => handleJoinLeave(community.communityName)}
-                  />
+            <DialogContent>
+                <DialogTitle className="text-center font-bold mb-4">Joined Communities</DialogTitle>
+                <input
+                    type="text" 
+                    placeholder="Search Joined Communities..."
+                    value={joinedDialogSearchQuery}
+                    onChange={(e) => setJoinedDialogSearchQuery(e.target.value)}
+                    className="w-[95%] mx-auto p-2 border border-muted rounded mb-4 mt-4 bg-transparent"
+                />
+                <div className="h-80 overflow-y-auto space-y-2">
+                    {joinedCommunities
+                      .filter(community => 
+                        community.communityName.toLowerCase().includes(joinedDialogSearchQuery.toLowerCase()) ||
+                        (community.description && community.description.toLowerCase().includes(joinedDialogSearchQuery.toLowerCase()))
+                      )
+                      .map((community) => (
+                        <div
+                          key={community._id}
+                          className="accountCard flex items-center justify-between gap-2 p-3 w-[95%] mx-auto border-y-[1px]"
+                        >
+                          <div className="flex items-center gap-2 flex-1">
+                            <img
+                              src={community.profilePicture}
+                              alt={community.communityName}
+                              className="w-10 h-10 rounded-full"
+                            />
+                            <div className="flex-1">
+                              <Link
+                                to={`/communities/c/${community.communityName}`}
+                                className="font-semibold truncate hover:underline"
+                              >
+                                {community.communityName}
+                              </Link>
+                              <p className="text-xs text-muted-foreground">
+                                {truncate(community.description, 20)}
+                              </p>
+                            </div>
+                          </div>
+                          <JoinLeaveButton
+                            communityName={community.communityName}
+                            isJoined={true}
+                            isRemoved={community.removedMem.includes(user?._id)}
+                            isPending={community.pendingReq.includes(user?._id)}
+                            onJoinLeave={() => handleJoinLeave(community.communityName)}
+                          />
+                        </div>
+                    ))}
                 </div>
-              ))}
-            </div>
-            <DialogClose asChild>
-              <Button className="w-full mt-4">Close</Button>
-            </DialogClose>
-          </DialogContent>
+                <DialogClose asChild>
+                    <Button className="w-full mt-4">Close</Button>
+                </DialogClose>
+            </DialogContent>
         </Dialog>
       </div>
       <div className="hidden lg:block w-1/3 h-screen overflow-auto border-l-[1px]">
-        <div className="text-xl font-semibold m-5 ml-2">Top Communities</div>
-        <div className="relative flex border-y-[] flex-col overflow-auto" style={{ height: `${100 - resizableHeight}%` }}>
-          {unjoinedCommunities?.map((community) => (
+        <div className="text-xl font-semibold m-5 mb-0 ml-2">Browse Communities</div>
+        <input
+          type="text"
+          placeholder="Search top communities..."
+          value={searchQueryTop}
+          onChange={(e) => setSearchQueryTop(e.target.value)}
+          className="w-[95%] mx-auto p-2 border border-muted rounded mb-4 ml-2 mt-4 bg-transparent"
+        />
+        <div className="relative flex flex-col overflow-auto" style={{ height: `${100 - resizableHeight}%` }}>
+          {filteredTopCommunities?.map((community) => (
             <div key={community._id} className="accountCard flex items-center justify-between gap-1 p-3 h-14 w-[95%] mx-auto border-y-[1px]">
               <div className="flex items-center gap-1">
                 <div className="min-w-fit">
@@ -416,7 +456,7 @@ const CommunitiesPage = () => {
           onMouseDown={handleMouseDown}
         ></div>
         <div className="relative flex flex-col overflow-auto" style={{ height: `${resizableHeight}%` }}>
-          <div className="text-xl font-semibold m-5 ml-2">Joined Communities</div>
+          <div className="text-xl font-semibold mb-0 m-5 ml-2">Joined Communities</div>
           <input
             type="text"
             placeholder="Search joined communities..."
