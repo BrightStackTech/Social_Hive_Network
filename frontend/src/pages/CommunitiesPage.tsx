@@ -12,7 +12,6 @@ import ComPostSkeletonLoader from '@/components/modules/ComPostSkeletonLoader'; 
 import Loader from '@/components/Loader';
 import { Dialog, DialogClose, DialogContent, DialogTitle} from '@/components/ui/dialog';// Adjust the import path based on your project structure
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 const CommunitiesPage = () => {
   const { user, token } = useAuth();
