@@ -44,6 +44,7 @@ const CommunityProfilePage: React.FC = () => {
   const [joinedCommunities, setJoinedCommunities] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [resizableHeight, setResizableHeight] = useState(50); 
+  const [searchQueryTop, setSearchQueryTop] = useState('');
 
   useEffect(() => {
     document.title = "SocialHive- Communities";
@@ -189,6 +190,11 @@ const CommunityProfilePage: React.FC = () => {
 
   const filteredJoinedCommunities = joinedCommunities.filter((community) =>
     community?.communityName?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredTopCommunities = unjoinedCommunities.filter((community) =>
+    community.communityName.toLowerCase().includes(searchQueryTop.toLowerCase()) ||
+    (community.description && community.description.toLowerCase().includes(searchQueryTop.toLowerCase()))
   );
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -358,27 +364,34 @@ const CommunityProfilePage: React.FC = () => {
         </div>
       </div>
       <div className="hidden lg:flex flex-col w-1/3 h-screen overflow-hidden border-l-[1px]">
-        <div className="text-xl font-semibold m-5 ml-2">Top Communities</div>
-        <div className="relative flex border-y-[] flex-col overflow-auto" style={{ height: `${100 - resizableHeight}%` }}>
-          {unjoinedCommunities.map((community) => (
-            <div key={community?._id} className="accountCard flex items-center justify-between gap-1 p-3 h-14 w-[95%] mx-auto border-y-[1px]">
+        <div className="text-xl font-semibold m-5 ml-2 mb-0">Browse Communities</div>
+        <input
+          type="text"
+          placeholder="Search top communities..."
+          value={searchQueryTop}
+          onChange={(e) => setSearchQueryTop(e.target.value)}
+          className="w-[95%] mx-auto p-2 border border-muted rounded mb-4 ml-2 mt-4 bg-transparent"
+        />
+        <div className="relative flex flex-col overflow-auto" style={{ height: `${100 - resizableHeight}%` }}>
+          {filteredTopCommunities?.map((community) => (
+            <div key={community._id} className="accountCard flex items-center justify-between gap-1 p-3 h-14 w-[95%] mx-auto border-y-[1px]">
               <div className="flex items-center gap-1">
                 <div className="min-w-fit">
-                  <img src={community?.profilePicture} className="w-10 h-10 rounded-full" alt={community?.communityName} />
+                  <img src={community.profilePicture} className="w-10 h-10 rounded-full" alt={community.communityName} />
                 </div>
                 <div>
-                  <Link to={`/communities/c/${community?.communityName}`} className="font-semibold overflow-ellipsis hover:underline">
-                    {community?.communityName}
+                  <Link to={`/communities/c/${community.communityName}`} className="font-semibold overflow-ellipsis hover:underline">
+                    {community.communityName}
                   </Link>
-                  <p className="text-xs text-muted-foreground">{community?.description}</p>
+                  <p className="text-xs text-muted-foreground">{community.description}</p>
                 </div>
               </div>
               <JoinLeaveButton
-                communityName={community?.communityName}
+                communityName={community.communityName}
                 isJoined={false}
-                isRemoved={community?.removedMem?.includes(user?._id)}
-                isPending={community?.pendingReq?.includes(user?._id)}
-                onJoinLeave={() => handleJoinLeave(community?.communityName)}
+                isRemoved={community.removedMem.includes(user?._id)}
+                isPending={community.pendingReq.includes(user?._id)}
+                onJoinLeave={() => handleJoinLeave(community.communityName)}
               />
             </div>
           ))}
@@ -388,7 +401,7 @@ const CommunityProfilePage: React.FC = () => {
           onMouseDown={handleMouseDown}
         ></div>
         <div className="relative flex flex-col overflow-auto" style={{ height: `${resizableHeight}%` }}>
-          <div className="text-xl font-semibold m-5 ml-2">Joined Communities</div>
+          <div className="text-xl font-semibold m-5 ml-2 mb-0">Joined Communities</div>
           <input
             type="text"
             placeholder="Search joined communities..."
