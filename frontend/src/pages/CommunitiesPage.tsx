@@ -18,9 +18,9 @@ const CommunitiesPage = () => {
   const [unjoinedCommunities, setUnjoinedCommunities] = useState<any[]>([]);
   const [communitiesFeed, setCommunitiesFeed] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const startY = useRef(0);
-  const [pulling, setPulling] = useState(false);
+  // const [refreshing, setRefreshing] = useState(false);
+  // const startY = useRef(0);
+  // const [pulling, setPulling] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults] = useState([]);
   const [searchLoading] = useState(false);
@@ -85,24 +85,24 @@ const CommunitiesPage = () => {
     setUnjoinedCommunities(prev => prev.filter(community => community.communityName !== communityName));
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    startY.current = e.touches[0].clientY;
-  };
+  // const handleTouchStart = (e: React.TouchEvent) => {
+  //   startY.current = e.touches[0].clientY;
+  // };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const currentY = e.touches[0].clientY;
-    if (currentY - startY.current > 50) {
-      setPulling(true);
-    }
-  };
+  // const handleTouchMove = (e: React.TouchEvent) => {
+  //   const currentY = e.touches[0].clientY;
+  //   if (currentY - startY.current > 50) {
+  //     setPulling(true);
+  //   }
+  // };
 
-  const handleTouchEnd = () => {
-    if (pulling) {
-      setRefreshing(true);
-      setPulling(false);
-      //window.location.reload();
-    }
-  };
+  // const handleTouchEnd = () => {
+  //   if (pulling) {
+  //     setRefreshing(true);
+  //     setPulling(false);
+  //     window.location.reload();
+  //   }
+  // };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -193,7 +193,7 @@ const CommunitiesPage = () => {
   };
 
   return (
-    <div className="flex w-full" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+    <div className="flex w-full">
       <div className="flex flex-col items-center w-full lg:w-2/3 h-screen">
         <MobileUserNavbar scrollableDiv={null} />
         {user && (
@@ -201,7 +201,7 @@ const CommunitiesPage = () => {
             <ComSearchBar onChange={handleSearchChange} onSubmit={handleSearchSubmit} />
           </nav>
         )}
-        {refreshing && <LoadingWheel />}
+        {/* {refreshing && <LoadingWheel />} */}
         <div className="flex-1 overflow-y-auto w-full h-full p-3" style={{ maxHeight: 'calc(115vh - 200px)' }}>
           {loading && (
             <>
