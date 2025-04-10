@@ -132,7 +132,7 @@ function OtherUserProfile() {
   const fetchCategories = async () => {
     setCategoriesLoading(true);
     try {
-      const response = await axios.get(`/api/v1/categories?createdBy=${otherUser._id}`)
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/categories?createdBy=${otherUser._id}`)
       setCategories(response.data.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -146,7 +146,7 @@ function OtherUserProfile() {
     setCatPostsLoading(true);
     try {
       const response = await axios.get(
-        `/api/v1/posts/search?query=${encodeURIComponent(categoryName)}`
+        `${import.meta.env.VITE_SERVER_URI}/posts/search?query=${encodeURIComponent(categoryName)}`
       );
       const filtered = response.data.data.posts.filter((post: PostInterface) => {
         const title = post.title.toLowerCase();
@@ -203,7 +203,7 @@ if (!text) {
   setCommunityPostsLoading(true);
   try {
     const response = await axios.get(
-      `/api/v1/composts/user/${otherUser._id}/community-posts`,
+      `${import.meta.env.VITE_SERVER_URI}/composts/user/${otherUser._id}/community-posts`,
       {
         headers: { Authorization: `Bearer ${user.token}` },
       }
@@ -226,7 +226,7 @@ if (!text) {
     useEffect(() => {
       const fetchUpdates = async () => {
         try {
-          const response = await axios.get(`/api/v1/updates/${otherUser._id}`);
+          const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/updates/${otherUser._id}`);
           setHasUpdates(response.data.length > 0);
         } catch (error) {
           console.error('Error fetching updates:', error);
