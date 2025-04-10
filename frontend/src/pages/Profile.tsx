@@ -561,7 +561,7 @@ function convertEmailToLink(text: string): string {
       }
       </div>}
     {selectedTab === "Community Posts" && (
-      <div className="community-posts">
+      <div className="community-posts min-h-[70vh]">
         {communityPostsLoading && (
           <div className="flex justify-center items-center h-full">
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
