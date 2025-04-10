@@ -13,7 +13,7 @@ import NotFound from './NotFound';
 
 const EditCommunityProfile: React.FC = () => {
     const { communityName } = useParams<{ communityName: string }>();
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const [community, setCommunity] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [description, setDescription] = useState('');
@@ -27,7 +27,7 @@ const EditCommunityProfile: React.FC = () => {
     useEffect(() => {
     const fetchCommunity = async () => {
         try {
-        const response = await axios.get(`/api/v1/communities/${decodedCommunityName}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/communities/${decodedCommunityName}`);
         setCommunity(response.data.data);
         setDescription(response.data.data.description);
         setProfilePictureUrl(response.data.data.profilePicture);
@@ -85,7 +85,7 @@ const EditCommunityProfile: React.FC = () => {
         }
 
         try {
-            await axios.put(`/api/v1/communities/${decodedCommunityName}`, {
+            await axios.put(`${import.meta.env.VITE_SERVER_URI}/communities/${decodedCommunityName}`, {
                 description,
                 profilePicture: profilePictureUrl,
             });
@@ -97,9 +97,9 @@ const EditCommunityProfile: React.FC = () => {
 
     const handleDeleteCommunity = async () => {
         try {
-            await axios.delete(`/api/v1/communities/${decodedCommunityName}`, {
+            await axios.delete(`${import.meta.env.VITE_SERVER_URI}/communities/${decodedCommunityName}`, {
                 headers: {
-                    Authorization: `Bearer ${user?.token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             navigate('/communities');
