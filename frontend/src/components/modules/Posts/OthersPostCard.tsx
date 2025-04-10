@@ -183,7 +183,7 @@ function convertUrlsToLinks(text: string): string {
     const handleSharePost = async () => {
       try {
         if (otherUser?._id === user?._id) return;
-        const response = await fetch(`/api/v1/posts/${post._id}/share`, {
+        const response = await fetch(`${import.meta.env.VITE_SERVER_URI}/posts/${post._id}/share`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -212,7 +212,7 @@ function convertUrlsToLinks(text: string): string {
         if (otherUser?._id === user?._id) return;
         // if not saved, then save the post using POST /:postId/save
         if (!isSaved) {
-          const response = await fetch(`/api/v1/posts/${post._id}/save`, {
+          const response = await fetch(`${import.meta.env.VITE_SERVER_URI}/posts/${post._id}/save`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
