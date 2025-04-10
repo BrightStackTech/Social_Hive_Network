@@ -192,6 +192,9 @@ const CommunitiesPage = () => {
     document.addEventListener('mouseup', onMouseUp);
   };
 
+  const truncate = (text: string, maxLength: number) =>
+  text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+
   return (
     <div className="flex w-full">
       <div className="flex flex-col items-center w-full lg:w-2/3 h-screen">
@@ -317,8 +320,8 @@ const CommunitiesPage = () => {
                       >
                         {community.communityName}
                       </Link>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {community.description}
+                      <p className="text-xs text-muted-foreground">
+                        {truncate(community.description, 20)}
                       </p>
                     </div>
                   </div>
@@ -361,8 +364,8 @@ const CommunitiesPage = () => {
                       >
                         {community.communityName}
                       </Link>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {community.description}
+                      <p className="text-xs text-muted-foreground">
+                        {truncate(community.description, 20)}
                       </p>
                     </div>
                   </div>
