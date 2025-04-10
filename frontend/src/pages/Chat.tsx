@@ -1567,7 +1567,7 @@ useEffect(() => {
                 <div className='min-w-fit' style={{ width: '30px', position: 'relative' }}>
                   <img src={message.sender?.profilePicture} className='w-7 h-7 min-w-fit rounded-full' alt="User profile Picture" />
                 </div>
-                <div className='max-w-[90%]'>
+                <div className='max-w-[80%] lg:max-w-[85%]'>
                   <Link to={`/user/${message.sender?.username}`} className='text-xs hover:underline text-muted dark:text-muted-foreground'>{message.sender?.username == user?.username ? 'You' : message.sender?.username}</Link>
                   <div className='w-full break-words text-white'>
                     {message.replyTo && (
