@@ -94,7 +94,7 @@ const PostCard = ({ postedUser, post, refreshFunc }: PostCardProps) => {
 useEffect(() => {
   if (user?._id && token) {
     axios
-      .get(`/api/v1/categories?createdBy=${user._id}`, {
+      .get(`${import.meta.env.VITE_SERVER_URI}/categories?createdBy=${user._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
