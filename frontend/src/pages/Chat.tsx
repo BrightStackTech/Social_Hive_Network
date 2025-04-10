@@ -1506,7 +1506,7 @@ useEffect(() => {
         extractAudioLinks();
       }}
       variant={"ghost"}
-      style={{ position: 'fixed', right: '80px' }}
+      className='fixed lg:right-20 right-10'
     >
       <FaFolderOpen style={{ width: '25px', height: '25px' }} />
     </Button>
@@ -1516,7 +1516,7 @@ useEffect(() => {
     <DocumentList links={documentLinks} />
   </DialogContent>
 </Dialog>
-            <Button onClick={handleSearchClick} variant={"ghost"} style={{position: 'fixed', right: '20px', }}>
+            <Button onClick={handleSearchClick} variant={"ghost"} className='fixed lg:right-6 right-0'>
                 <FaSearch style={{ width: '20px', height: '20px' }}/>
             </Button>
             {isSearchVisible && (
