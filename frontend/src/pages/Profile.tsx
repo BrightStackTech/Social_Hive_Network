@@ -446,7 +446,7 @@ function convertEmailToLink(text: string): string {
               </div>
             </div>
             <div className="w-full h-[2px] bg-muted mt-5"></div>
-            <div className={`profile-tabs bg-gray-200 sticky top-0 duration-300 z-[9999] dark:bg-gray-700 text-gray-800 dark:text-gray-200 my-3 overflow-x-auto whitespace-nowrap`}>
+            <div className={`profile-tabs bg-gray-200 lg:px-12 md:px-8 sticky top-0 duration-300 z-[9999] dark:bg-gray-700 text-gray-800 dark:text-gray-200 my-3 overflow-x-auto whitespace-nowrap`}>
               <ul className="flex gap-1">
                 <li
                   className={`cursor-pointer hover:text-blue-500 duration-150 p-3 md:px-2 m-2 ${selectedTab === "Posts" && "bg-muted font-bold hover:text-gray-500"}`}
