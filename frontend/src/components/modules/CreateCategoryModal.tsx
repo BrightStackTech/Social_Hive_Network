@@ -83,7 +83,7 @@ export default function CreateCategoryModal() {
     setIsLoading(true);
     try {
       // First, check if user already has a category with this name
-      const catResponse = await fetch(`/api/v1/categories?createdBy=${user?._id}`, {
+      const catResponse = await fetch(`${import.meta.env.VITE_SERVER_URI}/categories?createdBy=${user?._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (catResponse.ok) {
@@ -102,7 +102,7 @@ export default function CreateCategoryModal() {
       if (croppedImage) {
         uploadedImageUrl = await uploadImageToCloudinary(croppedImage);
       }
-      const response = await fetch('/api/v1/categories', {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URI}/categories`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
