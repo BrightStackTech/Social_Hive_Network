@@ -114,13 +114,13 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick })
     }
     try {
       await axios.put(
-        `/api/v1/categories/${category._id}`,
+        `${import.meta.env.VITE_SERVER_URI}/categories/${category._id}`,
         {
           name: editedName,
           description: editedDescription,
           imageUrl: editedImageUrl
         },
-        { headers: { Authorization: `Bearer ${user?.token}` } }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setIsEditing(false);
       window.location.reload();
@@ -134,8 +134,8 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick })
   const handleConfirmDelete = async () => {
     try {
       await axios.delete(
-        `/api/v1/categories/${category._id}`,
-        { headers: { Authorization: `Bearer ${user?.token}` } }
+        `${import.meta.env.VITE_SERVER_URI}/categories/${category._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setIsDropdownOpen(false);
       window.location.reload();
@@ -178,7 +178,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick })
 
     useEffect(() => {
     if (user?.username && token) {
-        fetch(`/api/v1/users/followers/${user.username}`, {
+        fetch(`${import.meta.env.VITE_SERVER_URI}/users/followers/${user.username}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,
