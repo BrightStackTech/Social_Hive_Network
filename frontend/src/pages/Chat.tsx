@@ -776,7 +776,7 @@ const decodeUrlFromRandomNumbers = (encodedUrl: string): string => {
               </div>
               <div class="file-buttons flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
                 <button class="view-file-button flex items-center justify-center w-full border border-gray-300 p-2 rounded-md hover:bg-gray-200 hover:text-black active:bg-gray-300" onclick="window.handleViewFile('${url}', '${displayName}')">
-                  <i class="fa fa-eye mr-2"></i> View File
+                  <i class="fa fa-eye mr-2"></i> View
                 </button>
                 <button class="download-file-button flex items-center justify-center w-full border border-gray-300 p-2 rounded-md hover:bg-gray-200 hover:text-black active:bg-gray-300" onClick="window.downloadFile('${url}', '${displayName}')">
                   <i class="fa fa-download mr-2"></i> Download
