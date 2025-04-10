@@ -38,7 +38,7 @@ const CheckUserUpdatePage = () => {
   useEffect(() => {
     const fetchUpdates = async () => {
       try {
-        const response = await axios.get(`/api/v1/updates/${userId}`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URI}/updates/${userId}`);
         setUpdates(response.data);
       } catch (error) {
         console.error('Error fetching updates:', error);
@@ -125,7 +125,7 @@ const CheckUserUpdatePage = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/v1/updates/${currentUpdate._id}`);
+      await axios.delete(`${import.meta.env.VITE_SERVER_URI}/updates/${currentUpdate._id}`);
       setUpdates(updates.filter((update) => update._id !== currentUpdate._id));
       navigate(-1);
     } catch (error) {
@@ -142,7 +142,7 @@ const CheckUserUpdatePage = () => {
 
   const incrementViewCount = async (updateId: string, viewerId: string): Promise<void> => {
     try {
-      await axios.post(`/api/v1/updates/${updateId}/view`, { viewerId });
+      await axios.post(`${import.meta.env.VITE_SERVER_URI}/updates/${updateId}/view`, { viewerId });
     } catch (error) {
       console.error('Error incrementing view count:', error);
     }
@@ -157,7 +157,7 @@ const CheckUserUpdatePage = () => {
 
   const fetchViewers = async (updateId: string): Promise<void> => {
     try {
-      const response = await axios.get<Viewer[]>(`/api/v1/updates/${updateId}/viewers`);
+      const response = await axios.get<Viewer[]>(`${import.meta.env.VITE_SERVER_URI}/updates/${updateId}/viewers`);
       setViewers(response.data);
     } catch (error) {
       console.error('Error fetching viewers:', error);
