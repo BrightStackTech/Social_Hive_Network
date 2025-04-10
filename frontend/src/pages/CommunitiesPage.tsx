@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import MobileUserNavbar from "@/components/sections/MobileUserNavbar";
 import ComSearchBar from "@/components/modules/ComSearchBar";
@@ -8,7 +8,7 @@ import axios from 'axios';
 import JoinLeaveButton from '@/components/modules/JoinLeaveButton';
 import ComPostCard from '@/components/modules/ComPostCard';
 import ComPostSkeletonLoader from '@/components/modules/ComPostSkeletonLoader'; // Import ComPostSkeletonLoader
-import LoadingWheel from '@/components/ui/LoadingWheel'; // Import LoadingWheel
+// import LoadingWheel from '@/components/ui/LoadingWheel'; // Import LoadingWheel
 import Loader from '@/components/Loader';
 import { Dialog, DialogClose, DialogContent, DialogTitle} from '@/components/ui/dialog';// Adjust the import path based on your project structure
 import { Button } from "@/components/ui/button";
