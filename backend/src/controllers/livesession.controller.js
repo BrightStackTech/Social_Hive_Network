@@ -62,7 +62,7 @@ export const updateRecordingURL = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Meeting id is required");
   }
   // Request the recording details from the external API
-  const jwtToken = import.meta.env.VITE_REACT_APP_VIDEOSDK_TOKEN;
+  const jwtToken = process.env.VIDEOSDK_TOKEN;
   const recordingsUrl = `https://api.videosdk.live/v2/recordings?roomId=${meetingId}`;
   const response = await axios.get(recordingsUrl, {
     headers: {
@@ -155,7 +155,7 @@ export const updateTerminatedAt = asyncHandler(async (req, res) => {
 });
 
 export const endMeetingForAll = async (meetingId) => {
-  const jwtToken = import.meta.env.VITE_REACT_APP_VIDEOSDK_TOKEN;
+  const jwtToken = process.env.VIDEOSDK_TOKEN;
   const getSessionUrl = `https://api.videosdk.live/v2/sessions?roomId=${meetingId}`;
   const { data } = await apiClient.get(getSessionUrl, {
     headers: {
