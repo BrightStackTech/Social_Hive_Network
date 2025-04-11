@@ -62,14 +62,14 @@ const LandingPage = () => {
               <h3 className='text-md md:text-2xl lg:text-3xl italic font-semibold text-center mt-2 lg:mt-10'>Post, Create Communities, and Collaborate by hosting live sessions in One Place!</h3>
               <div className='flex mt-5 lg:mt-36 justify-around'>
 
-            <Link to="/login" className="relative md:w-1/3 inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+            <Link to="/login" className="relative md:w-1/3 inline-flex h-14 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
               <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-              <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+              <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 lg:px-3 px-8 py-1 text-sm font-medium text-white backdrop-blur-3xl">
                 <User className='mr-2'/> Login
               </span>
             </Link>
 
-            <Link to="/register" className="px-5 md:px-8 py-3 md:w-1/3  flex justify-center rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200">
+            <Link to="/register" className="px-5 md:px-8 py-4 md:w-1/3  flex justify-center rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200">
                 <IoPersonAddOutline className='mr-2 text-xl' /> Register
             </Link>
 
