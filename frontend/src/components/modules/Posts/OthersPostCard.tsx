@@ -524,7 +524,7 @@ function convertUrlsToLinks(text: string): string {
               aria-label={isSaved ? "Unsave post" : "Save post"}
               className="flex hover:bg-muted cursor-pointer p-2 items-center gap-3"
             >
-              <FaRegBookmark className="w-5 h-5" color={isSaved ? "blue" : "white"} />
+              <FaRegBookmark className="w-5 h-5" color={isSaved ? "blue" : "black dark:white"} />
               <div className="text-sm">{post.savedBy?.length || 0}</div>
             </div>
         </div>
