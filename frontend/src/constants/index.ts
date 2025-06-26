@@ -138,7 +138,7 @@ export const colleges = [
   "Banaras Hindu University (BHU), Varanasi",
   "Jamia Hamdard, Delhi",
   "Vidyavardhini's College of Engineering and Technology, Mumbai",
-  "Dahanukar College of Commerce, Mumbai",
+  "M.L. Dahanukar College of Commerce, Mumbai",
   "Patkar College of Arts, Science & Commerce, Mumbai",
   "Sathaye College, Mumbai",
   "Bhartiya Vidya Bhavan’s College, Mumbai",
