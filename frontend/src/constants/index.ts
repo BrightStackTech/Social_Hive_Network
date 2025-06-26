@@ -119,7 +119,7 @@ export const colleges = [
   "Vignan's Foundation for Science, Technology, and Research (VFSTR), Guntur",
   "Visvesvaraya National Institute of Technology Nagpur (VNIT Nagpur), Nagpur",
   "Yeshwantrao Chavan College of Engineering Nagpur (YCCE Nagpur), Nagpur",
-  "KC College Higher educational institution in Mumbai, Maharashtra",
+  "Kishinchand Chellaram College Higher educational institution in Mumbai, Maharashtra (KC College)",
   "Lady Shri Ram College for Women (LSR), Delhi",
   "Miranda House, Delhi",
   "Hindu College, Delhi",
@@ -136,7 +136,16 @@ export const colleges = [
   "All India Institute of Medical Sciences (AIIMS), Delhi",
   "Jawaharlal Institute of Postgraduate Medical Education and Research (JIPMER), Puducherry",
   "Banaras Hindu University (BHU), Varanasi",
-  "Jamia Hamdard, Delhi"
+  "Jamia Hamdard, Delhi",
+  "Vidyavardhini's College of Engineering and Technology, Mumbai",
+  "Dahanukar College of Commerce, Mumbai",
+  "Patkar College of Arts, Science & Commerce, Mumbai",
+  "Sathaye College, Mumbai",
+  "Bhartiya Vidya Bhavan’s College, Mumbai",
+  "Sydenham College of Commerce and Economics, Mumbai",
+  "MIT World Peace University (MIT‑WPU), Pune",
+  "Sardar Patel Institute of Technology (SPIT), Mumbai",
+  "Thakur College of Engineering and Technology (TCET), Mumbai"
 ];
 
 
@@ -199,6 +208,7 @@ export const branches = [
   "Bachelor of Science in Computer Science",
   "Master of Science in Computer Science",
   "Bachelor of Science in Information Technology",
+  "Masters of Science in Information Technology",
   "Diploma in Web Development",
   "Diploma in App Development",
   "Diploma in Cyber Security",
