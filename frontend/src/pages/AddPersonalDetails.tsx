@@ -91,11 +91,11 @@ function AddPersonalDetails() {
           <Label htmlFor="year">Year of Graduation
             <span className="text-red-500 ml-1">*</span>
           </Label>
-          <Input id="year" value={yearOfGraduation} onChange={(e) => setYearOfGraduation(e.target.value)} placeholder="2024" type="text"/>
+          <Input id="year" value={yearOfGraduation} onChange={(e) => setYearOfGraduation(e.target.value)} placeholder="2025" type="text"/>
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="phone">Phone</Label>
-          <Input id="ohone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="1234567890" type="text" />
+          <Input id="ohone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="0987654321" type="text" />
         </LabelInputContainer>
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
