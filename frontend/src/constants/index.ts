@@ -145,7 +145,10 @@ export const colleges = [
   "Sydenham College of Commerce and Economics, Mumbai",
   "MIT World Peace University (MIT‑WPU), Pune",
   "Sardar Patel Institute of Technology (SPIT), Mumbai",
-  "Thakur College of Engineering and Technology (TCET), Mumbai"
+  "Thakur College of Engineering and Technology (TCET), Mumbai",
+  "MIT Art, Design and Technology University, Pune",
+  "VIVA Institute of Technology, Virar (East), Maharashtra",
+  "Savitribai Phule Pune University (SPPU), Pune, Maharashtra"
 ];
 
 
