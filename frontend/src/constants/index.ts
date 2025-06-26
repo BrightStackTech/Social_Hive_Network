@@ -148,132 +148,232 @@ export const colleges = [
   "Thakur College of Engineering and Technology (TCET), Mumbai",
   "MIT Art, Design and Technology University, Pune",
   "VIVA Institute of Technology, Virar (East), Maharashtra",
-  "Savitribai Phule Pune University (SPPU), Pune, Maharashtra"
+  "Savitribai Phule Pune University (SPPU), Pune, Maharashtra",
+  "Massachusetts Institute of Technology (MIT), Cambridge, MA, USA",
+  "Harvard University, Cambridge, MA, USA",
+  "University of Cambridge, Cambridge, UK",
+  "Deccan Education Society Pune University (DESPU), Pune, Maharashtra",
+  "MGM Medical College and Hospital, Aurangabad, Maharashtra",
+  "University of Petroleum and Energy Studies (UPES), Dehradun, Uttarakhand",
+  "Christ (Deemed to be University), Lavasa Campus, Maharashtra",
+  "Vellore Institute of Technology (VIT), Bhopal Campus, Madhya Pradesh",
+  "Narsee Monjee Institute of Management Studies (NMIMS), Mumbai",
+  "MET’s Institute of Technology (MET), Mumbai", 
+  "Stanford University, Stanford, California, USA"
 ];
 
 
 // list of branches with shortform in brackets
 export const branches = [
   // Engineering & Technology
-  "Bachelor of Technology in Agricultural Engineering",
-  "Master of Technology in Agricultural Engineering",
-  "Diploma in Agricultural Engineering",
+  "Bachelor of Technology in Agricultural Engineering (B.Tech)",
+  "Master of Technology in Agricultural Engineering (M.Tech)",
+  "PhD in Agricultural Engineering",
 
-  "Bachelor of Technology in Aeronautical Engineering",
-  "Master of Technology in Aeronautical Engineering",
+  "Bachelor of Technology in Aeronautical Engineering (B.Tech)",
+  "Master of Technology in Aeronautical Engineering (M.Tech)",
+  "PhD in Aeronautical Engineering",
 
-  "Bachelor of Technology in Biomedical Engineering",
-  "Master of Technology in Biomedical Engineering",
+  "Bachelor of Technology in Automobile Engineering (B.Tech)",
+  "Master of Technology in Automobile Engineering (M.Tech)",
+  "PhD in Automobile Engineering",
 
-  "Bachelor of Technology in Biotechnology",
-  "Master of Technology in Biotechnology",
+  "Bachelor of Technology in Biomedical Engineering (B.Tech)",
+  "Master of Technology in Biomedical Engineering (M.Tech)",
+  "PhD in Biomedical Engineering",
 
-  "Bachelor of Technology in Chemical Engineering",
-  "Master of Technology in Chemical Engineering",
+  "Bachelor of Technology in Biotechnology (B.Tech)",
+  "Master of Technology in Biotechnology (M.Tech)",
+  "PhD in Biotechnology",
 
-  "Bachelor of Technology in Computer Science Engineering",
-  "Master of Technology in Computer Science Engineering",
+  "Bachelor of Technology in Chemical Engineering (B.Tech)",
+  "Master of Technology in Chemical Engineering (M.Tech)",
+  "PhD in Chemical Engineering",
 
-  "Bachelor of Technology in Computer Science and Business Systems",
+  "Bachelor of Technology in Computer Science Engineering (B.Tech CSE)",
+  "Master of Technology in Computer Science Engineering (M.Tech CSE)",
+  "PhD in Computer Science Engineering",
 
-  "Bachelor of Technology in Electrical Engineering",
-  "Master of Technology in Electrical Engineering",
+  "Bachelor of Technology in Computer Science and Business Systems (B.Tech)",
 
-  "Bachelor of Technology in Electronics and Communication Engineering",
-  "Master of Technology in Electronics and Communication Engineering",
+  "Bachelor of Technology in Electrical Engineering (B.Tech)",
+  "Master of Technology in Electrical Engineering (M.Tech)",
+  "PhD in Electrical Engineering",
 
-  "Bachelor of Technology in Food Technology",
-  "Master of Technology in Food Technology",
+  "Bachelor of Technology in Electronics and Communication Engineering (B.Tech)",
+  "Master of Technology in Electronics and Communication Engineering (M.Tech)",
+  "PhD in Electronics and Communication Engineering",
 
-  "Bachelor of Technology in Information Technology",
-  "Master of Technology in Information Technology",
+  "Bachelor of Technology in Food Technology (B.Tech)",
+  "Master of Technology in Food Technology (M.Tech)",
+  "PhD in Food Technology",
 
-  "Bachelor of Technology in Marine Engineering",
+  "Bachelor of Technology in Information Technology (B.Tech IT)",
+  "Master of Technology in Information Technology (M.Tech IT)",
+  "PhD in Information Technology",
 
-  "Bachelor of Technology in Mechanical Engineering",
-  "Master of Technology in Mechanical Engineering",
+  "Bachelor of Technology in Marine Engineering (B.Tech)",
+  "PhD in Marine Engineering",
+
+  "Bachelor of Technology in Mechanical Engineering (B.Tech)",
+  "Master of Technology in Mechanical Engineering (M.Tech)",
   "Diploma in Mechanical Engineering",
+  "PhD in Mechanical Engineering",
 
-  "Bachelor of Technology in Metallurgical and Materials Engineering",
-  "Master of Technology in Metallurgical and Materials Engineering",
+  "Bachelor of Technology in Metallurgical and Materials Engineering (B.Tech)",
+  "Master of Technology in Metallurgical and Materials Engineering (M.Tech)",
+  "PhD in Metallurgical and Materials Engineering",
 
-  "Bachelor of Technology in Mining Engineering",
+  "Bachelor of Technology in Mining Engineering (B.Tech)",
+  "PhD in Mining Engineering",
 
-  "Bachelor of Technology in Production Engineering",
-  "Master of Technology in Production Engineering",
+  "Bachelor of Technology in Production Engineering (B.Tech)",
+  "Master of Technology in Production Engineering (M.Tech)",
+  "PhD in Production Engineering",
 
-  "Bachelor of Technology in Textile Technology",
+  "Bachelor of Technology in Textile Technology (B.Tech)",
   "Diploma in Textile Technology",
+  "PhD in Textile Technology",
+
+  // Emerging Tech
+  "Bachelor of Technology in Artificial Intelligence and Machine Learning (B.Tech AI & ML)",
+  "Master of Technology in Artificial Intelligence and Machine Learning (M.Tech AI & ML)",
+  "PhD in Artificial Intelligence and Machine Learning",
+
+  "Bachelor of Technology in Data Science (B.Tech DS)",
+  "Master of Technology in Data Science (M.Tech DS)",
+  "PhD in Data Science",
+
+  "Bachelor of Technology in Cloud Computing (B.Tech CC)",
+  "Master of Technology in Cloud Computing (M.Tech CC)",
+  "PhD in Cloud Computing",
+
+  "Bachelor of Technology in General AI (B.Tech GenAI)",
+  "Master of Technology in General AI (M.Tech GenAI)",
+  "PhD in General AI",
 
   // Computer & IT
-  "Bachelor of Computer Applications",
-  "Master of Computer Applications",
-  "Bachelor of Science in Computer Science",
-  "Master of Science in Computer Science",
-  "Bachelor of Science in Information Technology",
-  "Masters of Science in Information Technology",
+  "Bachelor of Computer Applications (BCA)",
+  "Master of Computer Applications (MCA)",
+  "PhD in Computer Applications",
+
+  "Bachelor of Science in Computer Science (B.Sc CS)",
+  "Master of Science in Computer Science (M.Sc CS)",
+  "PhD in Computer Science",
+
+  "Bachelor of Science in Information Technology (B.Sc IT)",
+  "Master of Science in Information Technology (M.Sc IT)",
+  "PhD in Information Technology",
+
   "Diploma in Web Development",
   "Diploma in App Development",
   "Diploma in Cyber Security",
 
   // Science
-  "Bachelor of Science in Physics",
-  "Master of Science in Physics",
-  "Bachelor of Science in Chemistry",
-  "Master of Science in Chemistry",
-  "Bachelor of Science in Biology",
-  "Master of Science in Biology",
-  "Bachelor of Science in Mathematics",
-  "Master of Science in Mathematics",
-  "Bachelor of Statistics",
-  "Master of Statistics",
+  "Bachelor of Science in Physics (B.Sc Physics)",
+  "Master of Science in Physics (M.Sc Physics)",
+  "PhD in Physics",
+
+  "Bachelor of Science in Chemistry (B.Sc Chemistry)",
+  "Master of Science in Chemistry (M.Sc Chemistry)",
+  "PhD in Chemistry",
+
+  "Bachelor of Science in Biology (B.Sc Biology)",
+  "Master of Science in Biology (M.Sc Biology)",
+  "PhD in Biology",
+
+  "Bachelor of Science in Mathematics (B.Sc Mathematics)",
+  "Master of Science in Mathematics (M.Sc Mathematics)",
+  "PhD in Mathematics",
+
+  "Bachelor of Statistics (B.Stat)",
+  "Master of Statistics (M.Stat)",
+  "PhD in Statistics",
 
   // Medical & Paramedical
   "Bachelor of Medicine and Bachelor of Surgery (MBBS)",
+  "PhD in Medicine",
+
   "Bachelor of Dental Surgery (BDS)",
+  "PhD in Dental Sciences",
+
   "Bachelor of Ayurvedic Medicine and Surgery (BAMS)",
+  "PhD in Ayurvedic Medicine",
+
   "Bachelor of Homeopathic Medicine and Surgery (BHMS)",
+  "PhD in Homeopathy",
+
   "Bachelor of Physiotherapy (BPT)",
-  "Bachelor of Science in Nursing",
-  "Master of Science in Nursing",
-  "Bachelor of Pharmacy",
-  "Master of Pharmacy",
-  "Diploma in Pharmacy",
+  "PhD in Physiotherapy",
+
+  "Bachelor of Science in Nursing (B.Sc Nursing)",
+  "Master of Science in Nursing (M.Sc Nursing)",
+  "PhD in Nursing",
+
+  "Bachelor of Pharmacy (B.Pharm)",
+  "Master of Pharmacy (M.Pharm)",
+  "Diploma in Pharmacy (D.Pharm)",
+  "PhD in Pharmacy",
+
   "Diploma in Medical Lab Technology (DMLT)",
   "Bachelor of Medical Lab Technology (BMLT)",
+  "PhD in Medical Lab Technology",
 
   // Commerce & Business
-  "Bachelor of Commerce in General Studies",
-  "Bachelor of Commerce in Banking and Insurance",
-  "Bachelor of Commerce in Accounting and Finance",
-  "Master of Commerce",
-  "Bachelor of Business Administration",
-  "Master of Business Administration / Post Graduate Diploma in Management",
-  "Chartered Accountancy",
-  "Company Secretary",
+  "Bachelor of Commerce in General Studies (B.Com)",
+  "Bachelor of Commerce in Banking and Insurance (BBI)",
+  "Bachelor of Commerce in Accounting and Finance (BAF)",
+  "Master of Commerce (M.Com)",
+  "PhD in Commerce",
+
+  "Bachelor of Business Administration (BBA)",
+  "Master of Business Administration / PGDM (MBA/PGDM)",
+  "PhD in Business Administration",
+
+  "Bachelor of Management Studies (BMS)",
+
+  "Chartered Accountancy (CA)",
+  "Company Secretary (CS)",
 
   // Arts & Humanities
-  "Bachelor of Arts in Economics",
-  "Bachelor of Arts in English",
-  "Bachelor of Arts in Political Science",
-  "Bachelor of Arts in History",
-  "Bachelor of Arts in Sociology",
-  "Bachelor of Arts in Psychology",
-  "Master of Arts in Economics",
-  "Master of Arts in English",
-  "Master of Arts in Political Science",
-  "Master of Arts in History",
-  "Master of Arts in Sociology",
-  "Master of Arts in Psychology",
-  "Bachelor of Social Work",
-  "Master of Social Work",
+  "Bachelor of Arts in Economics (BA Economics)",
+  "Master of Arts in Economics (MA Economics)",
+  "PhD in Economics",
+
+  "Bachelor of Arts in English (BA English)",
+  "Master of Arts in English (MA English)",
+  "PhD in English",
+
+  "Bachelor of Arts in Political Science (BA Political Science)",
+  "Master of Arts in Political Science (MA Political Science)",
+  "PhD in Political Science",
+
+  "Bachelor of Arts in History (BA History)",
+  "Master of Arts in History (MA History)",
+  "PhD in History",
+
+  "Bachelor of Arts in Sociology (BA Sociology)",
+  "Master of Arts in Sociology (MA Sociology)",
+  "PhD in Sociology",
+
+  "Bachelor of Arts in Psychology (BA Psychology)",
+  "Master of Arts in Psychology (MA Psychology)",
+  "PhD in Psychology",
+
+  "Bachelor of Social Work (BSW)",
+  "Master of Social Work (MSW)",
+  "PhD in Social Work",
 
   // Design & Media
-  "Bachelor of Design",
-  "Master of Design",
-  "Bachelor of Mass Media / Bachelor of Arts in Multimedia and Mass Communication",
-  "Bachelor of Journalism and Mass Communication",
-  "Master of Journalism and Mass Communication",
+  "Bachelor of Design (B.Des)",
+  "Master of Design (M.Des)",
+  "PhD in Design",
+
+  "Bachelor of Mass Media / BA in Multimedia and Mass Communication (BMM/BAMC)",
+  "Bachelor of Journalism and Mass Communication (BJMC)",
+  "Master of Journalism and Mass Communication (MJMC)",
+  "PhD in Journalism and Mass Communication",
+
   "Diploma in Animation",
   "Diploma in Graphic Design",
   "Diploma in UI/UX Design",
@@ -284,18 +384,24 @@ export const branches = [
   "Bachelor of Arts and Bachelor of Law (BA LLB)",
   "Bachelor of Business Administration and Bachelor of Law (BBA LLB)",
   "Master of Law (LLM)",
+  "PhD in Law",
 
   // Hotel Management & Tourism
-  "Bachelor of Hotel Management",
-  "Master of Hotel Management",
-  "Bachelor of Travel and Tourism Management",
+  "Bachelor of Hotel Management (BHM)",
+  "Master of Hotel Management (MHM)",
+  "PhD in Hotel Management",
 
-  // Others
+  "Bachelor of Travel and Tourism Management (BTTM)",
+  "PhD in Travel and Tourism",
+
+  // Competitive Exams & Certifications
+  "UPSC Civil Services Preparation",
   "Diploma in Digital Marketing",
   "Diploma in Foreign Languages (French)",
   "Diploma in Foreign Languages (German)",
   "Diploma in Foreign Languages (Spanish)"
 ];
+
 
 export const ChatEventEnums = {
     CONNECTED_EVENT: "connected",
