@@ -159,7 +159,8 @@ export const colleges = [
   "Vellore Institute of Technology (VIT), Bhopal Campus, Madhya Pradesh",
   "Narsee Monjee Institute of Management Studies (NMIMS), Mumbai",
   "MET’s Institute of Technology (MET), Mumbai", 
-  "Stanford University, Stanford, California, USA"
+  "Stanford University, Stanford, California, USA",
+  "Late G. N. Sapkal College of Engineering, Nashik, Maharashtra"
 ];
 
 
