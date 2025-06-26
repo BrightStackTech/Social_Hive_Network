@@ -160,7 +160,9 @@ export const colleges = [
   "Narsee Monjee Institute of Management Studies (NMIMS), Mumbai",
   "MET’s Institute of Technology (MET), Mumbai", 
   "Stanford University, Stanford, California, USA",
-  "Late G. N. Sapkal College of Engineering, Nashik, Maharashtra"
+  "Late G. N. Sapkal College of Engineering, Nashik, Maharashtra",
+  "R A Podar College Of Commerce & Economics",
+  "Guru Nanak Khalsa College of Arts, Science & Commerce"
 ];
 
 
